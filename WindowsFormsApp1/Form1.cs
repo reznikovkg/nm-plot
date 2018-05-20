@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace nmplot
 {
     public partial class Form1 : Form
     {
@@ -18,48 +18,51 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             Prop = new IP();
+            PlotInitFunc();
+
+            chart_plot.Series[0].Enabled = true;
+            chart_plot.Series[1].Enabled = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            chart1.ChartAreas[0].AxisX.ScaleView.Zoom(0, 50);
-            chart1.ChartAreas[0].CursorX.IsUserEnabled = true;
-            chart1.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
-            chart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-            chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
+            chart_plot.ChartAreas[0].AxisX.ScaleView.Zoom(0, 50);
+            chart_plot.ChartAreas[0].CursorX.IsUserEnabled = true;
+            chart_plot.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+            chart_plot.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            chart_plot.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
 
-            chart1.ChartAreas[0].AxisY.ScaleView.Zoom(-1, 20);
-            chart1.ChartAreas[0].CursorY.IsUserEnabled = true;
-            chart1.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
-            chart1.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
-            chart1.ChartAreas[0].AxisY.ScrollBar.IsPositionedInside = true;
+            chart_plot.ChartAreas[0].AxisY.ScaleView.Zoom(-1, 20);
+            chart_plot.ChartAreas[0].CursorY.IsUserEnabled = true;
+            chart_plot.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
+            chart_plot.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
+            chart_plot.ChartAreas[0].AxisY.ScrollBar.IsPositionedInside = true;
+
         }
         
-        private void chart1_Click(object sender, EventArgs e)
+        private void chart_Click(object sender, EventArgs e)
         {
-            chart1.Series[1].Points.AddXY(13, 13);
-
+            chart_plot.Series[1].Points.AddXY(13, 13);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Myf();
-            IP Mycl = new IP();
+            //PlotInitFunc();
 
-            Mycl.SetA(14.3);
-            chart1.Series[1].Points.AddXY(3, Mycl.GetA());
+            chart_plot.Series[0].Enabled = true;
         }
 
-        public void Myf()
+        public void PlotInitFunc()
         {
 
-            for (int i = (int)Prop.GetA(); i < (int)Prop.GetB(); i += 1)
+            for (double i = Prop.GetA(); i < Prop.GetB(); i += 0.01)
             {
-                chart1.Series[0].Points.AddXY(i, Math.Cos(i));
+                chart_plot.Series[0].Points.AddXY(i, Math.Cos(i));
             }
-            for (int i = 0; i < 50; i += 3)
+
+            for (double i = Prop.GetA(); i < Prop.GetB(); i += 0.01)
             {
-                chart1.Series[1].Points.AddXY(i, Math.Sin(i));
+                chart_plot.Series[1].Points.AddXY(i, Math.Sin(i));
             }
         }
 
@@ -68,9 +71,51 @@ namespace WindowsFormsApp1
 
         }
 
-        private void button_rebuild(object sender, EventArgs e)
+        private void button_Rebuild(object sender, EventArgs e)
         {
-            chart1.Series[0].Points.AddXY(15, 20);
+            chart_plot.Series[0].Points.Clear();
+
+            if (initial_param_a.Text.Length > 0)
+            {
+                Prop.SetA(double.Parse(initial_param_a.Text));
+            }
+            if (initial_param_b.Text.Length > 0)
+            {
+                Prop.SetB(double.Parse(initial_param_b.Text));
+            }
+
+
+            PlotInitFunc();
+            
+        }
+
+        private void checkBox_Function(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                chart_plot.Series[0].Enabled = true;
+            }
+            else
+            {
+                chart_plot.Series[0].Enabled = false;
+            }
+        }
+
+        private void checkBox_Spline(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked == true)
+            {
+                chart_plot.Series[1].Enabled = true;
+            }
+            else
+            {
+                chart_plot.Series[1].Enabled = false;
+            }
+        }
+
+        private void файлToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

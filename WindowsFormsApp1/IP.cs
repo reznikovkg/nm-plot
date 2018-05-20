@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsFormsApp1
+namespace nmplot
 {
     class IP
     {
@@ -21,6 +21,12 @@ namespace WindowsFormsApp1
         public double f(double x)
         {
             return Math.Cos(x);
+        }
+
+        public double s(double a, double b, double c, double d, double x, double xi)
+        {
+            double xt = x - xi;
+            return a + b * xt + c * xt * xt + d * xt * xt * xt;
         }
 
         ~IP()

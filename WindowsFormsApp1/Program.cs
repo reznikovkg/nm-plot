@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using nmplot.Classes;
 
-namespace WindowsFormsApp1
+namespace nmplot
 {
     static class Program
     {
