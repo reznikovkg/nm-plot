@@ -7,21 +7,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using nmplot.Classes;
 
 namespace nmplot
 {
     public partial class Form1 : Form
     {
-        private IP Prop;
+        private IP initial;
+        private Polynom polynom;
 
         public Form1()
         {
             InitializeComponent();
-            Prop = new IP();
-            PlotInitFunc();
+            initial = new IP();
+            polynom = new Polynom();
+
+            polynom.SetPointsByFunction(initial.Function, initial.GetA(), initial.GetB(), initial.GetN());
+            polynom.setCoeffC(initial.GetTA(), initial.GetTB());
+            polynom.solveCoeffC();
+            polynom.setCoeffSpline();
 
             chart_plot.Series[0].Enabled = true;
             chart_plot.Series[1].Enabled = true;
+
+            for (double i = initial.GetA(); i < initial.GetB(); i+=0.01)
+            {
+                chart_plot.Series[0].Points.AddXY(i, initial.Function(i));
+            }
+
+            for (int i = 0; i < polynom.pointsCount(); i ++)
+            {
+                chart_plot.Series[1].Points.AddXY(polynom.GetPoint(i,0), polynom.GetPoint(i, 1));
+            }
+
+            for (int i = 0; i < polynom.pointsCount()-1; i++)
+            {
+                for (double j = polynom.GetPoint(i,0); j< polynom.GetPoint(i + 1, 0); j += 0.01)
+                {
+
+                    chart_plot.Series[2].Points.AddXY(j, polynom.pointSpline(j,i));
+
+                }
+            }
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -52,18 +80,13 @@ namespace nmplot
             chart_plot.Series[0].Enabled = true;
         }
 
-        public void PlotInitFunc()
+        private void PlotPointsFunction(IP init)
         {
 
-            for (double i = Prop.GetA(); i < Prop.GetB(); i += 0.01)
+           /* for (double i = Prop.GetA(); i < Prop.GetB(); i += 0.01)
             {
                 chart_plot.Series[0].Points.AddXY(i, Math.Cos(i));
-            }
-
-            for (double i = Prop.GetA(); i < Prop.GetB(); i += 0.01)
-            {
-                chart_plot.Series[1].Points.AddXY(i, Math.Sin(i));
-            }
+            }*/
         }
 
         private void fontDialog1_Apply(object sender, EventArgs e)
@@ -75,17 +98,16 @@ namespace nmplot
         {
             chart_plot.Series[0].Points.Clear();
 
-            if (initial_param_a.Text.Length > 0)
+           /* if (initial_param_a.Text.Length > 0)
             {
                 Prop.SetA(double.Parse(initial_param_a.Text));
             }
             if (initial_param_b.Text.Length > 0)
             {
                 Prop.SetB(double.Parse(initial_param_b.Text));
-            }
+            }*/
 
-
-            PlotInitFunc();
+            
             
         }
 
@@ -112,10 +134,6 @@ namespace nmplot
                 chart_plot.Series[1].Enabled = false;
             }
         }
-
-        private void файлToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

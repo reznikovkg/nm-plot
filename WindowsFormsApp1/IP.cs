@@ -11,24 +11,35 @@ namespace nmplot
         private double a;
         private double b;
 
-        
-        public IP()
+        private int n;
+
+        private double tA;
+        private double tB;
+
+        public double Function(double x)
         {
-            this.a = 3;
-            this.b = 12;
+            //return Math.Cos(x);
+            return x * x * x ;
         }
 
-        public double f(double x)
-        {
-            return Math.Cos(x);
-        }
-
-        public double s(double a, double b, double c, double d, double x, double xi)
+        public double Spline(double a, double b, double c, double d, double x, double xi)
         {
             double xt = x - xi;
             return a + b * xt + c * xt * xt + d * xt * xt * xt;
         }
 
+
+        public IP()
+        {
+            this.a = 3;
+            this.b = 12;
+
+            this.n = 4;
+
+            this.tA = 0;
+            this.tB = 0;
+        }
+        
         ~IP()
         {
 
@@ -53,6 +64,36 @@ namespace nmplot
         public double GetB()
         {
             return this.b;
+        }
+
+        public void SetN(int _n)
+        {
+            this.n = _n;
+        }
+
+        public int GetN()
+        {
+            return this.n;
+        }
+
+        public void SetTA(double _tA)
+        {
+            this.tA = _tA;
+        }
+
+        public double GetTA()
+        {
+            return this.tA;
+        }
+
+        public void SetTB(double _tB)
+        {
+            this.tB = _tB;
+        }
+
+        public double GetTB()
+        {
+            return this.tB;
         }
     }
 }
