@@ -54,13 +54,13 @@ namespace nmplot
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            chart_plot.ChartAreas[0].AxisX.ScaleView.Zoom(0, 50);
+            //chart_plot.ChartAreas[0].AxisX.ScaleView.Zoom(-5, 50);
             chart_plot.ChartAreas[0].CursorX.IsUserEnabled = true;
             chart_plot.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
             chart_plot.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
             chart_plot.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
 
-            chart_plot.ChartAreas[0].AxisY.ScaleView.Zoom(-1, 20);
+            //chart_plot.ChartAreas[0].AxisY.ScaleView.Zoom(-1, 20);
             chart_plot.ChartAreas[0].CursorY.IsUserEnabled = true;
             chart_plot.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
             chart_plot.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
@@ -70,7 +70,7 @@ namespace nmplot
         
         private void chart_Click(object sender, EventArgs e)
         {
-            chart_plot.Series[1].Points.AddXY(13, 13);
+            //chart_plot.Series[1].Points.AddXY(13, 13);
         }
 
         private void button1_Click(object sender, EventArgs e)
