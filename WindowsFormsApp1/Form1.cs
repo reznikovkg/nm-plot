@@ -21,14 +21,12 @@ namespace nmplot
             InitializeComponent();
             initial = new IP();
             polynom = new Polynom();
+            
 
-            pMatrix mm = new pMatrix();
+            polynom.SetPointsByFunction(initial.Function, initial.GetA(), initial.GetB(), initial.GetN());
+            polynom.setCoeffC(initial.GetTA(), initial.GetTB());
+            polynom.setCoeffSpline(initial.GetTA(), initial.GetTB());
 
-            mm.init();
-            mm.setTest();
-            List<double> z = mm.solveF();
-
-            //polynom.SetPointsByFunction(initial.Function, initial.GetA(), initial.GetB(), initial.GetN());
             /*polynom.exam();
             polynom.setCoeffC(initial.GetTA(), initial.GetTB());
             polynom.solveCoeffC();

@@ -29,29 +29,6 @@ namespace nmplot.Classes
             this.f = new List<double>();
         }
 
-        public void setTest()
-        {
-            a.Add(0);
-            a.Add(-2);
-            a.Add(3);
-            a.Add(1);
-
-            b.Add(4);
-            b.Add(2);
-            b.Add(3);
-            b.Add(-3);
-
-            c.Add(1);
-            c.Add(3);
-            c.Add(1);
-            c.Add(0);
-
-            f.Add(2);
-            f.Add(3);
-            f.Add(12);
-            f.Add(2);
-        }
-
         public void setABCF(List<double> a, List<double> b, List<double> c, List<double> f)
         {
             this.a = a;
