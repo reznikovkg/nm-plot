@@ -37,7 +37,7 @@ namespace nmplot
             this.n = 6;
 
             this.tA = 0;
-            this.tB = 0;
+            this.tB = 5;
         }
         
         ~IP()

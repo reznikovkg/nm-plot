@@ -49,6 +49,16 @@ namespace nmplot.Classes
             }
         }
 
+        public void exam()
+        {
+            this.AddPoint(1, 1.0002);
+            this.AddPoint(2, 1.0341);
+            this.AddPoint(3, 0.6);
+            this.AddPoint(4, 0.40105);
+            this.AddPoint(5, 0.1);
+            this.AddPoint(6, 0.23975);
+        }
+
         public void AddPoint(double x, double y)
         {
             this.points.Add(new List<double>());
@@ -89,22 +99,22 @@ namespace nmplot.Classes
                 3 * ((this.GetPoint(2, 1) - this.GetPoint(1, 1)) / this.GetH(1) - (this.GetPoint(1, 1) - this.GetPoint(0, 1)) / this.GetH(0))
                 );*/
 
-            this.AddCoeffС(
-                0,
-                -1,
-                1,
-                A*this.GetH(0)/3
-                );
+            /* this.AddCoeffС(
+                 0,
+                 -1,
+                 1,
+                 A*this.GetH(0)/3
+                 );
 
-            for (int i = 1; i < this.pointsCount()-1; i++)
-            {
-                this.AddCoeffС(
-                    this.GetH(i-1), 
-                    2*(this.GetH(i - 1) + this.GetH(i)),
-                    this.GetH(i), 
-                    3*((this.GetPoint(i+1,1) - this.GetPoint(i, 1)) / this.GetH(i) - (this.GetPoint(i,1)- this.GetPoint(i-1,1)) / this.GetH(i-1))
-                    );
-            }
+             for (int i = 1; i < this.pointsCount()-1; i++)
+             {
+                 this.AddCoeffС(
+                     this.GetH(i-1), 
+                     2*(this.GetH(i - 1) + this.GetH(i)),
+                     this.GetH(i), 
+                     3*((this.GetPoint(i+1,1) - this.GetPoint(i, 1)) / this.GetH(i) - (this.GetPoint(i,1) - this.GetPoint(i-1,1)) / this.GetH(i-1))
+                     );
+             }*/
 
             /*this.AddCoeffС(
                 this.GetH(this.pointsCount() - 3),
@@ -113,13 +123,63 @@ namespace nmplot.Classes
                 3 * ((this.GetPoint(this.pointsCount() - 1, 1) - this.GetPoint(this.pointsCount() - 2, 1)) / this.GetH(this.pointsCount() - 2) - (this.GetPoint(this.pointsCount() - 2, 1) - this.GetPoint(this.pointsCount() - 3, 1)) / this.GetH(this.pointsCount() - 3))
                 );*/
 
+            // this.AddCoeffС(
+            /*this.GetH(this.pointsCount()-2)* this.GetH(this.pointsCount() - 2)* this.GetH(this.pointsCount() - 2)/3,
+            4* this.GetH(this.pointsCount() - 2)* this.GetH(this.pointsCount() - 2)/3,
+            0,
+            this.GetPoint(this.pointsCount()-1, 1) - 2* this.GetPoint(this.pointsCount()-2, 1) + this.GetPoint(this.pointsCount()-3, 1) - B*this.GetH(this.pointsCount() - 2)* this.GetH(this.pointsCount() - 2)/6
+            */
+            // 100,99999,0,20);
+
+            /*this.AddCoeffС(
+                    0,
+                    -2,
+                    this.GetH(1) / (this.GetH(0) + this.GetH(1)),
+                    3 * ((this.GetPoint(2, 1) - this.GetPoint(1, 1)) / this.GetH(1) - (this.GetPoint(1, 1) - this.GetPoint(0, 1)) / this.GetH(0)) * (this.GetH(0) + this.GetH(1))
+                    );
+
+            for (int i = 1; i < this.pointsCount()-2; i++)
+            {
+                double hh = (this.GetH(i - 1) + this.GetH(i));
+
+                this.AddCoeffС(
+                    this.GetH(i - 1)/hh,
+                    -2,
+                    this.GetH(i)/hh,
+                    3 * ((this.GetPoint(i + 1, 1) - this.GetPoint(i, 1)) / this.GetH(i) - (this.GetPoint(i, 1) - this.GetPoint(i - 1, 1)) / this.GetH(i - 1))*hh
+                    );
+            }
+
             this.AddCoeffС(
-                this.GetH(this.pointsCount()-2)* this.GetH(this.pointsCount() - 2)* this.GetH(this.pointsCount() - 2)/3,
-                4* this.GetH(this.pointsCount() - 2)* this.GetH(this.pointsCount() - 2)/3,
+                   this.GetH(this.pointsCount() - 3) / (this.GetH(this.pointsCount() - 3) + this.GetH(this.pointsCount() - 2)),
+                   -2,
+                   0,
+                   3 * ((this.GetPoint(this.pointsCount() - 1, 1) - this.GetPoint(this.pointsCount() - 2, 1)) / this.GetH(1) - (this.GetPoint(this.pointsCount() - 2, 1) - this.GetPoint(this.pointsCount() - 3, 1)) / this.GetH(0)) * (this.GetH(0) + this.GetH(1))
+                   );*/
+
+            this.AddCoeffС(
                 0,
-                this.GetPoint(this.pointsCount()-1, 1) - 2* this.GetPoint(this.pointsCount()-2, 1) + this.GetPoint(this.pointsCount()-3, 1) - B*this.GetH(this.pointsCount() - 2)* this.GetH(this.pointsCount() - 2)/6
+                A/6,
+                this.GetH(1),
+                3 * ((this.GetPoint(2, 1) - this.GetPoint(1, 1)) / this.GetH(2) - (this.GetPoint(1, 1) - this.GetPoint(0, 1)) / this.GetH(1))
                 );
 
+            for (int i = 1; i < this.pointsCount() - 2; i++)
+            {
+                this.AddCoeffС(
+                    this.GetH(i),
+                    2*(this.GetH(i)+this.GetH(i+1)),
+                    this.GetH(i+1),
+                    3 * ((this.GetPoint(i+1, 1) - this.GetPoint(i, 1)) / this.GetH(i+1) - (this.GetPoint(i, 1) - this.GetPoint(i-1, 1)) / this.GetH(i))
+                    );
+            }
+
+            this.AddCoeffС(
+                this.GetH(this.pointsCount() - 2),
+                1,
+                0,
+                3 * ((this.GetPoint(this.pointsCount() - 1, 1) - this.GetPoint(this.pointsCount() - 2, 1)) / this.GetH(this.pointsCount() - 2) - (this.GetPoint(this.pointsCount() - 2, 1) - this.GetPoint(this.pointsCount() - 3, 1)) / this.GetH(this.pointsCount() - 2))
+                );
         }
 
         public void solveCoeffC()
@@ -168,10 +228,11 @@ namespace nmplot.Classes
             }*/
 
 
-            int N = this.pointsCount();
+            int N = this.pointsCount()-1;
             List<double> L = new List<double>();
             List<double> M = new List<double>();
             List<double> X = new List<double>();
+
             for (int i = 0; i < N; i++)
             {
                 L.Add(0);  M.Add(0);  X.Add(0);
@@ -209,26 +270,28 @@ namespace nmplot.Classes
             }
         }
 
-        public void setCoeffSpline()
+        public void setCoeffSpline(double A, double B)
         {
-            int N = this.pointsCount() - 1;
+
+            int N = this.pointsCount() - 2;
+            this.coeffSpline[0][3] =A/6;
+
             for (int i = 0; i < N; i++)
             {
                 this.coeffSpline[i][0] = this.GetPoint(i, 1);
-                this.coeffSpline[i][1] = (this.GetPoint(i + 1, 1) - this.GetPoint(i, 1)) / GetH(i) - (2 / 3) * this.coeffSpline[i][2] * GetH(i) - this.coeffSpline[i + 1][2] * GetH(i) / 3;
-                this.coeffSpline[i][3] = (this.coeffSpline[i + 1][2] - this.coeffSpline[i][2]) / (3*GetH(i));
+                this.coeffSpline[i][1] = (this.GetPoint(i + 1, 1) - this.GetPoint(i, 1)) / GetH(i) - (this.GetH(i)/3)*(2*this.coeffSpline[i][2] +this.coeffSpline[i+1][2]);
+                this.coeffSpline[i+1][3] =  (this.coeffSpline[i + 1][2] - this.coeffSpline[i][2]) / (3*GetH(i));
             }
 
-            this.coeffSpline[N][0] = this.GetPoint(N, 1)+200;
+            this.coeffSpline[N][0] = this.GetPoint(N, 1);
             this.coeffSpline[N][1] = this.coeffSpline[N-1][1] +2*this.coeffSpline[N-1][2]*this.GetH(N - 1) + 3*this.coeffSpline[N-1][3]*this.GetH(N-1)* this.GetH(N - 1);
-            this.coeffSpline[N][3] = 100;
         }
 
 
         public double pointSpline(double x, int i)
         {
             double xt = x - this.GetPoint(i,0);
-            return this.coeffSpline[i][0] + this.coeffSpline[i][1] * xt + this.coeffSpline[i][2] * xt * xt + this.coeffSpline[i][3] * xt * xt * xt;
+            return this.coeffSpline[i][0] + this.coeffSpline[i][1] * xt + this.coeffSpline[i][2] * xt*xt + this.coeffSpline[i][3] * xt * xt * xt;
         }
     }
 }

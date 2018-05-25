@@ -50,6 +50,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\pMatrix.cs" />
     <Compile Include="Classes\Polynom.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
