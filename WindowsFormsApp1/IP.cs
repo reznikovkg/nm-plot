@@ -18,7 +18,7 @@ namespace nmplot
 
         public double Function(double x)
         {
-            return Math.Cos(x);
+            return Math.Sin(x);
             //return x * x * x ;
         }
 
@@ -37,7 +37,7 @@ namespace nmplot
             this.n = 6;
 
             this.tA = 0;
-            this.tB = 5;
+            this.tB = 1;
         }
         
         ~IP()

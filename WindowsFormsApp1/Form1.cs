@@ -24,7 +24,7 @@ namespace nmplot
             
 
             polynom.SetPointsByFunction(initial.Function, initial.GetA(), initial.GetB(), initial.GetN());
-            polynom.setCoeffC(initial.GetTA(), initial.GetTB());
+            polynom.setCoeffC();
             polynom.setCoeffSpline(initial.GetTA(), initial.GetTB());
 
             /*polynom.exam();
@@ -34,24 +34,24 @@ namespace nmplot
 
             chart_plot.Series[0].Enabled = true;
             chart_plot.Series[1].Enabled = true;
-
+            */
             for (double i = initial.GetA(); i < initial.GetB(); i+=0.01)
             {
                 chart_plot.Series[0].Points.AddXY(i, initial.Function(i));
             }
 
-            for (int i = 0; i < polynom.pointsCount(); i ++)
+            for (int i = 0; i < polynom.CountX(); i ++)
             {
-                chart_plot.Series[1].Points.AddXY(polynom.GetPoint(i,0), polynom.GetPoint(i, 1));
+                chart_plot.Series[1].Points.AddXY(polynom.GetX(i), polynom.GetFX(i));
             }
-
-            for (int i = 0; i < polynom.pointsCount()-1; i++)
+            
+            for (int i = 0; i < polynom.CountX()-1; i++)
             {
-                for (double j = polynom.GetPoint(i,0); j< polynom.GetPoint(i + 1, 0); j += 0.01)
+                for (double j = polynom.GetX(i); j < polynom.GetX(i + 1); j += 0.01)
                 {
                     chart_plot.Series[2].Points.AddXY(j, polynom.pointSpline(j,i));
                 }
-            }*/
+            }
 
         }
 
