@@ -8,29 +8,56 @@ namespace nmplot.Classes
 {
     class Polynom
     {
-        private Func<string, int> f;
-        private List<List<double>> points;
-        private List<List<double>> coeffС;
-        private List<List<double>> coeffSpline;
+        private Func<double, double> f;
+
+        private List<double> X;
+        private List<double> FX;
+        private List<double> H;
+
+        private List<List<double>> coeffB;
+
+        private List<double> A;
+        private List<double> B;
+        private List<double> C;
+        private List<double> D;
 
 
         public Polynom()
         {
-            this.points = new List<List<double>>();
-            this.coeffС = new List<List<double>>();
-            this.coeffSpline = new List<List<double>>();
+            this.X = new List<double>();
+            this.FX = new List<double>();
+            this.H = new List<double>();
+
+            this.coeffB = new List<List<double>>();
+            this.coeffB.Add(new List<double>());
+            this.coeffB.Add(new List<double>());
+            this.coeffB.Add(new List<double>());
+            this.coeffB.Add(new List<double>());
+
+
+            this.A = new List<double>();
+            this.B = new List<double>();
+            this.C = new List<double>();
+            this.D = new List<double>();
         }
 
-        public void SetPointsByFunction(Func<double,double> f, double a, double b, int n, string type = "norm")
+        public void SetPointsByFunction(Func<double,double> ff, double a, double b, int n, string type = "norm")
         {
+            this.f = ff;
+
             switch (type)
             {
                 case "norm":
                     {
-                        double h = (b - a) / n;
+                        double h = (b - a) / (n-1);
                         for (double i = a; i <= b; i += h)
                         {
-                            this.AddPoint(i, f(i));
+                            this.X.Add(i);
+                            this.FX.Add(this.f(i));
+                            if (this.X.Count > 1)
+                            {
+                                this.H.Add(this.X[this.X.Count-1] - this.X[this.X.Count-2]);
+                            }
                         }
                         break;
                     }
@@ -39,7 +66,7 @@ namespace nmplot.Classes
                         for (int i = 0; i <= n; i++)
                         {
                             double xi = (a + b) / 2 + (b - a) / 2 * Math.Cos((2 * i + 1) * Math.PI / (2 * n + 2));
-                            this.AddPoint(xi, f(xi));
+                            //this.AddPoint(xi, f(xi));
                         }
 
                         break;
@@ -48,108 +75,114 @@ namespace nmplot.Classes
                     break;
             }
         }
-
-        public void AddPoint(double x, double y)
+        
+        public int CountX()
         {
-            this.points.Add(new List<double>());
-            points[points.Count - 1].Add(x);
-            points[points.Count - 1].Add(y);
+            return this.X.Count;
         }
 
-        public double GetPoint(int x, int y)
+        public int CountFX()
         {
-            return points[x][y];
+            return this.FX.Count;
         }
-    
+
+        public double GetX(int i)
+        {
+            return this.X[i];
+        }
+
+        public double GetFX(int i)
+        {
+            return this.FX[i];
+        }
+
         public double GetH(int i)
         {
-            return Math.Abs(this.GetPoint(i+1,0) - this.GetPoint(i, 0));
+            return this.H[i];
         }
 
-        public int pointsCount()
+        public void AddCoeffB(double a, double b, double c, double f)
         {
-            return points.Count;
+            coeffB[0].Add(a);
+            coeffB[1].Add(b);
+            coeffB[2].Add(c);
+            coeffB[3].Add(f);
         }
 
-        public void AddCoeffС(double a, double b, double c, double d)
+        public List<double> GetCoeffB_A()
         {
-            this.coeffС.Add(new List<double>());
-            coeffС[coeffС.Count - 1].Add(a);
-            coeffС[coeffС.Count - 1].Add(b);
-            coeffС[coeffС.Count - 1].Add(c);
-            coeffС[coeffС.Count - 1].Add(d);
+            return this.coeffB[0];
         }
 
-        public void setCoeffC(double A, double B)
+        public List<double> GetCoeffB_B()
         {
-            this.AddCoeffС(
-                this.GetH(0),
-                2 * (this.GetH(0) + this.GetH(1)),
-                this.GetH(1),
-                3 * ((this.GetPoint(2, 1) - this.GetPoint(1, 1)) / this.GetH(1) - (this.GetPoint(1, 1) - this.GetPoint(0, 1)) / this.GetH(0))
-                );
+            return this.coeffB[1];
+        }
 
-            for (int i = 1; i < this.pointsCount() - 1; i++)
+        public List<double> GetCoeffB_C()
+        {
+            return this.coeffB[2];
+        }
+
+        public List<double> GetCoeffB_F()
+        {
+            return this.coeffB[3];
+        }
+
+        public void setCoeffB()
+        {
+            for (int i = 1; i < this.X.Count-1; i++)
             {
-                this.AddCoeffС(
-                    this.GetH(i-1), 
-                    2*(this.GetH(i - 1)+ this.GetH(i)),
-                    this.GetH(i), 
-                    3*((this.GetPoint(i+1,1) - this.GetPoint(i, 1)) / this.GetH(i) - (this.GetPoint(i,1)- this.GetPoint(i-1,1)) / this.GetH(i-1))
+                this.AddCoeffB(
+                    this.H[i-1],
+                    4 * this.H[i-1],
+                    this.H[i-1],
+                    3 * (this.FX[i + 1] - this.FX[i] ) - 3*(this.FX[i-1] - this.FX[i])
                     );
             }
-
-            this.AddCoeffС(
-                this.GetH(this.pointsCount() - 3),
-                2 * (this.GetH(this.pointsCount() - 3) + this.GetH(this.pointsCount() - 2)),
-                this.GetH(this.pointsCount() - 2),
-                3 * ((this.GetPoint(this.pointsCount() - 1, 1) - this.GetPoint(this.pointsCount() - 2, 1)) / this.GetH(this.pointsCount() - 2) - (this.GetPoint(this.pointsCount() - 2, 1) - this.GetPoint(this.pointsCount() - 3, 1)) / this.GetH(this.pointsCount() - 3))
+            this.AddCoeffB(
+                    this.H[this.X.Count - 2],
+                    4 * this.H[this.X.Count - 2],
+                    this.H[this.X.Count - 2],
+                    3 * (this.f(this.X[this.X.Count - 1]+this.H[this.X.Count - 2]) - this.FX[this.X.Count - 1]) - 3 * (this.FX[this.X.Count - 2] - this.FX[this.X.Count - 1])
                 );
         }
 
-        public void solveCoeffC()
+        public void setCoeffSpline(double tA, double tB)
         {
-            for (int i = 0; i < this.pointsCount(); i++)
+            pMatrix coeff = new pMatrix();
+            coeff.setABCF(this.GetCoeffB_A(), this.GetCoeffB_B(), this.GetCoeffB_C(), this.GetCoeffB_F());
+            this.B = coeff.solveF();
+
+
+            this.A = this.FX;
+
+            this.C.Add((this.FX[1] - this.FX[0])/(this.H[0]* this.H[0]) - this.B[0]/ this.H[0] - tA * this.H[0] /6 );
+            this.D.Add(tA / 6);
+
+
+            int last_i = 0;
+            for (int i = 1; i< this.B.Count-1; i++)
             {
-                this.coeffSpline.Add(new List<double>());
-                coeffSpline[coeffSpline.Count - 1].Add(0);
-                coeffSpline[coeffSpline.Count - 1].Add(0);
-                coeffSpline[coeffSpline.Count - 1].Add(0);
-                coeffSpline[coeffSpline.Count - 1].Add(0);
+                //this.C.Add((-2 * this.B[i] - this.B[i + 1]) / this.H[i] - 3 * (this.FX[i] - this.FX[i + 1]) / (this.H[i] * this.H[i]));
+                this.D.Add((this.B[i] + this.B[i + 1]) / (this.H[i]* this.H[i]) + 2 * (this.FX[i] - this.FX[i + 1]) / (this.H[i] * this.H[i] * this.H[i]));
+
+                this.C.Add((this.FX[i + 1] - this.FX[i]) / (this.H[i] * this.H[i]) - this.B[i] / this.H[i] - this.D[i] * this.H[i]);
+
+                last_i = i;
             }
+            last_i++;
+            
+            this.C.Add( (this.B[this.B.Count - 1] - this.B[this.B.Count - 2]) / this.H[this.B.Count - 2] - this.C[this.B.Count - 2]);
+            this.D.Add( (tB/2 -  this.C[this.B.Count - 1]) / (3 * this.H[this.B.Count - 1]) );
 
-            double m;
-
-            for (int i = 1; i < this.pointsCount(); i++)
-            {
-                m = this.coeffС[i][0] / this.coeffС[i - 1][1];
-                this.coeffС[i][1] = this.coeffС[i][1] - m * this.coeffС[i - 1][2];
-                this.coeffС[i][3] = this.coeffС[i][3] - m * this.coeffС[i - 1][3];
-            }
-
-            this.coeffSpline[this.pointsCount() - 1][2] = this.coeffС[this.pointsCount() - 1][3] / this.coeffС[this.pointsCount() - 1][1];
-
-            for (int i = this.pointsCount() -2; i>=0;i--)
-            {
-                this.coeffSpline[i][2] = (this.coeffС[i][3] - this.coeffС[i][2] * this.coeffSpline[i + 1][2]) / this.coeffС[i][1];
-            }
-        }
-
-        public void setCoeffSpline()
-        {
-            for (int i = 0; i < this.pointsCount()-1; i++)
-            {
-                this.coeffSpline[i][0] = this.GetPoint(i, 1);
-                this.coeffSpline[i][1] = (this.GetPoint(i + 1, 1) - this.GetPoint(i, 1)) / GetH(i) - (2 / 3) * this.coeffSpline[i][2] * GetH(i) - this.coeffSpline[i + 1][2] * GetH(i) / 3;
-                this.coeffSpline[i][3] = (this.coeffSpline[i + 1][2] - this.coeffSpline[i][2]) / (3*GetH(i));
-            }
         }
 
 
         public double pointSpline(double x, int i)
         {
-            double xt = x - this.GetPoint(i,0);
-            return this.coeffSpline[i][0] + this.coeffSpline[i][1] * xt + this.coeffSpline[i][2] * xt * xt + this.coeffSpline[i][3] * xt * xt * xt;
+            double xt = x - this.X[i];
+            return this.A[i] + this.B[i] * xt + this.C[i] * xt*xt + this.D[i] * xt * xt * xt;
         }
     }
 }

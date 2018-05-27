@@ -21,32 +21,35 @@ namespace nmplot
             InitializeComponent();
             initial = new IP();
             polynom = new Polynom();
+            
 
             polynom.SetPointsByFunction(initial.Function, initial.GetA(), initial.GetB(), initial.GetN());
+            polynom.setCoeffB();
+            polynom.setCoeffSpline(initial.GetTA(), initial.GetTB());
+
+            /*polynom.exam();
             polynom.setCoeffC(initial.GetTA(), initial.GetTB());
             polynom.solveCoeffC();
-            polynom.setCoeffSpline();
+            polynom.setCoeffSpline(initial.GetTA(), initial.GetTB());
 
             chart_plot.Series[0].Enabled = true;
             chart_plot.Series[1].Enabled = true;
-
-            for (double i = initial.GetA(); i < initial.GetB(); i+=0.01)
+            */
+            for (double i = initial.GetA()-10; i < initial.GetB()+10; i+=0.01)
             {
                 chart_plot.Series[0].Points.AddXY(i, initial.Function(i));
             }
 
-            for (int i = 0; i < polynom.pointsCount(); i ++)
+            for (int i = 0; i < polynom.CountX(); i++)
             {
-                chart_plot.Series[1].Points.AddXY(polynom.GetPoint(i,0), polynom.GetPoint(i, 1));
+                chart_plot.Series[1].Points.AddXY(polynom.GetX(i), polynom.GetFX(i));
             }
-
-            for (int i = 0; i < polynom.pointsCount()-1; i++)
+            
+            for (int i = 0; i < polynom.CountX()-1; i++)
             {
-                for (double j = polynom.GetPoint(i,0); j< polynom.GetPoint(i + 1, 0); j += 0.01)
+                for (double j = polynom.GetX(i); j < polynom.GetX(i + 1); j += 0.001)
                 {
-
                     chart_plot.Series[2].Points.AddXY(j, polynom.pointSpline(j,i));
-
                 }
             }
 
@@ -54,13 +57,13 @@ namespace nmplot
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            chart_plot.ChartAreas[0].AxisX.ScaleView.Zoom(0, 50);
+            //chart_plot.ChartAreas[0].AxisX.ScaleView.Zoom(1.98, 2.02);
             chart_plot.ChartAreas[0].CursorX.IsUserEnabled = true;
             chart_plot.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
             chart_plot.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
             chart_plot.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
 
-            chart_plot.ChartAreas[0].AxisY.ScaleView.Zoom(-1, 20);
+            //chart_plot.ChartAreas[0].AxisY.ScaleView.Zoom(0.85, 0.95);
             chart_plot.ChartAreas[0].CursorY.IsUserEnabled = true;
             chart_plot.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
             chart_plot.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
@@ -70,7 +73,7 @@ namespace nmplot
         
         private void chart_Click(object sender, EventArgs e)
         {
-            chart_plot.Series[1].Points.AddXY(13, 13);
+            //chart_plot.Series[1].Points.AddXY(13, 13);
         }
 
         private void button1_Click(object sender, EventArgs e)
