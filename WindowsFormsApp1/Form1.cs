@@ -40,12 +40,12 @@ namespace nmplot
                 chart_plot.Series[0].Points.AddXY(i, initial.Function(i));
             }
 
-            for (int i = 0; i < polynom.CountX(); i ++)
+            for (int i = 0; i <= polynom.GetN(); i ++)
             {
                 chart_plot.Series[1].Points.AddXY(polynom.GetX(i), polynom.GetFX(i));
             }
             
-            for (int i = 0; i < polynom.CountX()-1; i++)
+            for (int i = 0; i <= polynom.GetN()-1; i++)
             {
                 for (double j = polynom.GetX(i); j < polynom.GetX(i + 1); j += 0.01)
                 {
