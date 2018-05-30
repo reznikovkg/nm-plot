@@ -209,7 +209,7 @@ namespace nmplot.Classes
             
             this.B.Add( this.B[last_i-1] + this.C[last_i-1]*this.H[last_i-1] + this.C[last_i]* this.H[last_i - 1]);
 
-            this.D.Add( (tB - this.C[last_i])/(3*this.H[last_i]) );
+            this.D.Add( (tB - 2*this.C[last_i])/(6*this.H[last_i]) );
         }
 
 
