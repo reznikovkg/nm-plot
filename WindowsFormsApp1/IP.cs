@@ -34,10 +34,10 @@ namespace nmplot
             this.a = 0;
             this.b = 10;
 
-            this.n = 6;
+            this.n = 30;
 
             this.tA = 0;
-            this.tB = -1;
+            this.tB = 1;
         }
         
         ~IP()
