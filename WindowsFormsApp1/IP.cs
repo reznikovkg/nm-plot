@@ -18,8 +18,10 @@ namespace nmplot
 
         public double Function(double x)
         {
-            return Math.Sin(x);
-            //return x * x * x ;
+            //return Math.Sin(x);
+            return x * x *x;
+            //return 1 / (1 + 25 * x * x);
+            //return Math.Abs(x);
         }
 
         public double Spline(double a, double b, double c, double d, double x, double xi)
@@ -31,10 +33,10 @@ namespace nmplot
 
         public IP()
         {
-            this.a = 0;
-            this.b = 10;
+            this.a = -3;
+            this.b = 3;
 
-            this.n = 6;
+            this.n = 5;
 
             this.tA = 0;
             this.tB = 0;
