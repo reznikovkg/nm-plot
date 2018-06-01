@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Controls;
 using nmplot.Classes;
 
 namespace nmplot
@@ -14,15 +15,18 @@ namespace nmplot
     public partial class Form1 : Form
     {
         private IP initial;
-        private Polynom polynom;
+        private Spline polynom;
 
         double tError;
+
+       
+
 
         public Form1()
         {
             InitializeComponent();
             initial = new IP();
-            polynom = new Polynom();
+            polynom = new Spline();
             
 
             polynom.SetPointsByFunction(initial.Function, initial.GetA(), initial.GetB(), initial.GetN());
@@ -81,11 +85,114 @@ namespace nmplot
             chart_plot.ChartAreas[0].AxisY.ScrollBar.IsPositionedInside = true;
 
         }
-        
-        private void chart_Click(object sender, EventArgs e)
+
+        ///////////////
+        //
+        //     Menu
+        //
+        ///////////////
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        ///////////////
+        //
+        //     Chart
+        //
+        ///////////////
+
+        void chart_Click(object sender, EventArgs e)
         {
             //chart_plot.Series[1].Points.AddXY(13, 13);
         }
+
+        ///////////////
+        //
+        //     Options tabs/Show/Hide
+        //
+        ///////////////
+
+        private void checkBox_All(object sender, EventArgs e)
+        {
+            if (checkBoxShowHide.Checked == true)
+            {
+                chart_plot.Series[0].Enabled = true;
+                checkBoxFunction.Checked = true;
+
+                chart_plot.Series[1].Enabled = true;
+                checkBoxPoints.Checked = true;
+
+                chart_plot.Series[2].Enabled = true;
+                checkBoxSpline.Checked = true;
+
+                chart_plot.Series[3].Enabled = true;
+            }
+            else
+            {
+                chart_plot.Series[0].Enabled = false;
+                checkBoxFunction.Checked = false;
+
+                chart_plot.Series[1].Enabled = false;
+                checkBoxPoints.Checked = false;
+
+                chart_plot.Series[2].Enabled = false;
+                checkBoxSpline.Checked = false;
+
+                chart_plot.Series[3].Enabled = false;
+            }
+        }
+
+        private void checkBox_Function(object sender, EventArgs e)
+        {
+            if (checkBoxFunction.Checked == true)
+            {
+                chart_plot.Series[0].Enabled = true;
+            }
+            else
+            {
+                chart_plot.Series[0].Enabled = false;
+            }
+        }
+
+        private void checkBox_Points(object sender, EventArgs e)
+        {
+            if (checkBoxPoints.Checked == true)
+            {
+                chart_plot.Series[1].Enabled = true;
+            }
+            else
+            {
+                chart_plot.Series[1].Enabled = false;
+            }
+        }
+
+        private void checkBox_Spline(object sender, EventArgs e)
+        {
+            if (checkBoxSpline.Checked == true)
+            {
+                chart_plot.Series[2].Enabled = true;
+            }
+            else
+            {
+                chart_plot.Series[2].Enabled = false;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -111,47 +218,44 @@ namespace nmplot
         private void button_Rebuild(object sender, EventArgs e)
         {
             chart_plot.Series[0].Points.Clear();
-
-           /* if (initial_param_a.Text.Length > 0)
-            {
-                Prop.SetA(double.Parse(initial_param_a.Text));
-            }
-            if (initial_param_b.Text.Length > 0)
-            {
-                Prop.SetB(double.Parse(initial_param_b.Text));
-            }*/
-
-            
-            
         }
 
-        private void checkBox_Function(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked == true)
-            {
-                chart_plot.Series[0].Enabled = true;
-            }
-            else
-            {
-                chart_plot.Series[0].Enabled = false;
-            }
-        }
-
-        private void checkBox_Spline(object sender, EventArgs e)
-        {
-            if (checkBox2.Checked == true)
-            {
-                chart_plot.Series[1].Enabled = true;
-            }
-            else
-            {
-                chart_plot.Series[1].Enabled = false;
-            }
-        }
+        
 
         private void label3_Click(object sender, EventArgs e)
         {
             label3.Text = "dsadsa";
+        }
+
+        
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("топовая прога");
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

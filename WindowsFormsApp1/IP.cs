@@ -24,13 +24,6 @@ namespace nmplot
             //return Math.Abs(x);
         }
 
-        public double Spline(double a, double b, double c, double d, double x, double xi)
-        {
-            double xt = x - xi;
-            return a + b * xt + c * xt * xt + d * xt * xt * xt;
-        }
-
-
         public IP()
         {
             this.a = 0;
