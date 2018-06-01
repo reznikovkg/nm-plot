@@ -56,7 +56,7 @@ namespace nmplot
                     chart_plot.Series[2].Points.AddXY(j, polynom.pointSpline(j,i));
 
                     double t = Math.Abs(initial.Function(j) - polynom.pointSpline(j, i));
-                    if (t > this.tError) this.tError = t;
+                    if ((t > this.tError)) this.tError = t;
                 }
             }
 
