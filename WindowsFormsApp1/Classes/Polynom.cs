@@ -31,11 +31,11 @@ namespace nmplot.Classes
             this.FX = new List<double>();
             this.H = new List<double>();
 
-            this.coeffB = new List<List<double>>();
-            this.coeffB.Add(new List<double>());
-            this.coeffB.Add(new List<double>());
-            this.coeffB.Add(new List<double>());
-            this.coeffB.Add(new List<double>());
+            this.coeffC = new List<List<double>>();
+            this.coeffC.Add(new List<double>());
+            this.coeffC.Add(new List<double>());
+            this.coeffC.Add(new List<double>());
+            this.coeffC.Add(new List<double>());
 
 
             this.A = new List<double>();
@@ -111,37 +111,37 @@ namespace nmplot.Classes
         }
         public void AddCoeffC(double a, double b, double c, double f)
         {
-            coeffB[0].Add(a);
-            coeffB[1].Add(b);
-            coeffB[2].Add(c);
-            coeffB[3].Add(f);
+            coeffC[0].Add(a);
+            coeffC[1].Add(b);
+            coeffC[2].Add(c);
+            coeffC[3].Add(f);
         }
 
-        public List<double> GetCoeffB_A()
+        public List<double> GetCoeffC_A()
         {
-            return this.coeffB[0];
+            return this.coeffC[0];
         }
 
-        public List<double> GetCoeffB_B()
+        public List<double> GetCoeffC_B()
         {
-            return this.coeffB[1];
+            return this.coeffC[1];
         }
 
-        public List<double> GetCoeffB_C()
+        public List<double> GetCoeffC_C()
         {
-            return this.coeffB[2];
+            return this.coeffC[2];
         }
 
-        public List<double> GetCoeffB_F()
+        public List<double> GetCoeffC_F()
         {
-            return this.coeffB[3];
+            return this.coeffC[3];
         }
 
         public void setCoeffB()
         {
             for (int i = 1; i < n; i++)
             {
-                this.AddCoeffB(
+                this.AddCoeffC(
                     this.H[i-1],
 
                     2 * (this.H[i] + this.H[i-1]),
