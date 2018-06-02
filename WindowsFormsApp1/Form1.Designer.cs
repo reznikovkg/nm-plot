@@ -128,7 +128,6 @@ namespace nmplot
             this.chart_plot.Size = new System.Drawing.Size(908, 538);
             this.chart_plot.TabIndex = 1;
             this.chart_plot.Text = "chart1";
-            this.chart_plot.Visible = false;
             this.chart_plot.Click += new System.EventHandler(this.chart_Click);
             this.chart_plot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chart_plot_MouseClick);
             // 
