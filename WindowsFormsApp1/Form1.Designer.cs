@@ -68,7 +68,11 @@ namespace nmplot
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.plot1 = new OxyPlot.WindowsForms.PlotView();
+            this.oxy_plot = new OxyPlot.WindowsForms.PlotView();
+            this.plotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.methodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chartToolStripMenuMethodChart = new System.Windows.Forms.ToolStripMenuItem();
+            this.oxyPlotToolStripMenuOxyplot = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.chart_plot)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -79,12 +83,15 @@ namespace nmplot
             // 
             // chart_plot
             // 
+            this.chart_plot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.AxisX2.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Lines;
             chartArea1.Name = "ChartArea1";
             this.chart_plot.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart_plot.Legends.Add(legend1);
-            this.chart_plot.Location = new System.Drawing.Point(12, 35);
+            this.chart_plot.Location = new System.Drawing.Point(10, 35);
             this.chart_plot.Name = "chart_plot";
             this.chart_plot.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             series1.ChartArea = "ChartArea1";
@@ -125,7 +132,7 @@ namespace nmplot
             this.chart_plot.Series.Add(series2);
             this.chart_plot.Series.Add(series3);
             this.chart_plot.Series.Add(series4);
-            this.chart_plot.Size = new System.Drawing.Size(908, 538);
+            this.chart_plot.Size = new System.Drawing.Size(938, 538);
             this.chart_plot.TabIndex = 1;
             this.chart_plot.Text = "chart1";
             this.chart_plot.Click += new System.EventHandler(this.chart_Click);
@@ -133,7 +140,7 @@ namespace nmplot
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(951, 403);
+            this.button1.Location = new System.Drawing.Point(1005, 412);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -154,7 +161,7 @@ namespace nmplot
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(941, 445);
+            this.comboBox1.Location = new System.Drawing.Point(995, 454);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(142, 21);
             this.comboBox1.TabIndex = 4;
@@ -225,6 +232,7 @@ namespace nmplot
             this.menuStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.plotToolStripMenuItem,
             this.файлToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -270,7 +278,7 @@ namespace nmplot
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(938, 509);
+            this.label3.Location = new System.Drawing.Point(992, 518);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 12;
@@ -280,7 +288,7 @@ namespace nmplot
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(938, 486);
+            this.label4.Location = new System.Drawing.Point(992, 495);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(128, 13);
             this.label4.TabIndex = 13;
@@ -313,6 +321,7 @@ namespace nmplot
             this.checkBoxPolynom.TabIndex = 15;
             this.checkBoxPolynom.Text = "Polynom";
             this.checkBoxPolynom.UseVisualStyleBackColor = true;
+            this.checkBoxPolynom.CheckedChanged += new System.EventHandler(this.checkBox_Polynom);
             // 
             // checkBoxShowHide
             // 
@@ -371,13 +380,16 @@ namespace nmplot
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(941, 36);
+            this.tabControl1.Location = new System.Drawing.Point(961, 35);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(243, 178);
+            this.tabControl1.Size = new System.Drawing.Size(240, 286);
             this.tabControl1.TabIndex = 24;
             // 
             // tabPage1
@@ -390,7 +402,7 @@ namespace nmplot
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(10);
-            this.tabPage1.Size = new System.Drawing.Size(235, 152);
+            this.tabPage1.Size = new System.Drawing.Size(232, 260);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Show/Hide";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -424,34 +436,71 @@ namespace nmplot
             this.tabPage3.Text = "[a,b]";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // plot1
+            // oxy_plot
             // 
-            this.plot1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.plot1.Location = new System.Drawing.Point(41, 36);
-            this.plot1.Margin = new System.Windows.Forms.Padding(0);
-            this.plot1.Name = "plot1";
-            this.plot1.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.plot1.Size = new System.Drawing.Size(585, 343);
-            this.plot1.TabIndex = 0;
-            this.plot1.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
-            this.plot1.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
-            this.plot1.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
-            this.plot1.Click += new System.EventHandler(this.plot1_Click);
+            this.oxy_plot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.oxy_plot.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.oxy_plot.Location = new System.Drawing.Point(10, 35);
+            this.oxy_plot.Margin = new System.Windows.Forms.Padding(0);
+            this.oxy_plot.Name = "oxy_plot";
+            this.oxy_plot.PanCursor = System.Windows.Forms.Cursors.Hand;
+            this.oxy_plot.Size = new System.Drawing.Size(938, 538);
+            this.oxy_plot.TabIndex = 0;
+            this.oxy_plot.Visible = false;
+            this.oxy_plot.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
+            this.oxy_plot.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.oxy_plot.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
+            this.oxy_plot.Click += new System.EventHandler(this.plot1_Click);
+            // 
+            // plotToolStripMenuItem
+            // 
+            this.plotToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.methodToolStripMenuItem});
+            this.plotToolStripMenuItem.Name = "plotToolStripMenuItem";
+            this.plotToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.plotToolStripMenuItem.Text = "Plot";
+            // 
+            // methodToolStripMenuItem
+            // 
+            this.methodToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.chartToolStripMenuMethodChart,
+            this.oxyPlotToolStripMenuOxyplot});
+            this.methodToolStripMenuItem.Name = "methodToolStripMenuItem";
+            this.methodToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.methodToolStripMenuItem.Text = "Method";
+            // 
+            // chartToolStripMenuMethodChart
+            // 
+            this.chartToolStripMenuMethodChart.Checked = true;
+            this.chartToolStripMenuMethodChart.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chartToolStripMenuMethodChart.Name = "chartToolStripMenuMethodChart";
+            this.chartToolStripMenuMethodChart.Size = new System.Drawing.Size(180, 22);
+            this.chartToolStripMenuMethodChart.Text = "Chart";
+            this.chartToolStripMenuMethodChart.Click += new System.EventHandler(this.chartToolStripMenuMethodChart_Click);
+            // 
+            // oxyPlotToolStripMenuOxyplot
+            // 
+            this.oxyPlotToolStripMenuOxyplot.Name = "oxyPlotToolStripMenuOxyplot";
+            this.oxyPlotToolStripMenuOxyplot.Size = new System.Drawing.Size(180, 22);
+            this.oxyPlotToolStripMenuOxyplot.Text = "OxyPlot";
+            this.oxyPlotToolStripMenuOxyplot.Click += new System.EventHandler(this.oxyPlotToolStripMenuOxyplot_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1201, 585);
-            this.Controls.Add(this.plot1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.chart_plot);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Controls.Add(this.oxy_plot);
+            this.Controls.Add(this.chart_plot);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -473,8 +522,6 @@ namespace nmplot
         }
 
         #endregion
-
-        private PlotView plot1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_plot;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
@@ -506,6 +553,11 @@ namespace nmplot
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private PlotView oxy_plot;
+        private System.Windows.Forms.ToolStripMenuItem plotToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem methodToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chartToolStripMenuMethodChart;
+        private System.Windows.Forms.ToolStripMenuItem oxyPlotToolStripMenuOxyplot;
     }
 }
 
