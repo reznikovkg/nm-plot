@@ -33,6 +33,8 @@ namespace nmplot
         public Form1()
         {
             InitializeComponent();
+
+
             initial = new IP();
             polynom = new Spline();
 
