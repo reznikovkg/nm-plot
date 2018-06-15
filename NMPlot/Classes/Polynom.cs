@@ -79,7 +79,7 @@ namespace nmplot.Classes
         }
 
 
-        //polynom out - P(x)
+        //spline out - P(x)
         public double pointPolynom(double x)
         {
             return getPointY(0) + pRec(x, 1, n);

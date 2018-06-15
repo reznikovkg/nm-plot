@@ -23,7 +23,12 @@ namespace nmplot
     public partial class Form1 : Form
     {
         private IP initial;
-        private Spline polynom;
+
+        private List<double> X;
+        private List<double> Y;
+
+        private Spline spline;
+        private Polynom polynom;
 
         double tError;
 
@@ -36,59 +41,67 @@ namespace nmplot
 
 
             initial = new IP();
-            polynom = new Spline();
 
 
 
-            polynom.SetPointsByFunction(initial.Function, initial.GetA(), initial.GetB(), initial.GetN());
-            polynom.setCoeffB();
-            polynom.setCoeffSpline(initial.GetTA(), initial.GetTB());
+            spline = new Spline();
+            polynom = new Polynom();
 
-            /*polynom.exam();
-            polynom.setCoeffC(initial.GetTA(), initial.GetTB());
-            polynom.solveCoeffC();
-            polynom.setCoeffSpline(initial.GetTA(), initial.GetTB());
 
-            chart_plot.Series[0].Enabled = true;
-            chart_plot.Series[1].Enabled = true;
-            */
+
+
+
             for (double i = initial.GetA()-10; i < initial.GetB()+10; i+=0.01)
             {
                 chart_plot.Series[0].Points.AddXY(i, initial.Function(i));
             }
 
-            for (int i = 0; i <= polynom.GetN(); i ++)
-            {
-                chart_plot.Series[1].Points.AddXY(polynom.GetX(i), polynom.GetFX(i));
-            }
-
-
-            this.tError = 0;
             
-            for (double j = 0; j < 10; j += 0.001)
-            {
-                chart_plot.Series[2].Points.AddXY(j, polynom.pointSpline(j));
 
-                double t = Math.Abs(initial.Function(j) - polynom.pointSpline(j));
-                if ((t > this.tError)) this.tError = t;
+
+
+            //spline
+            {
+                spline.SetPointsByFunction(initial.Function, initial.GetA(), initial.GetB(), initial.GetN());
+                spline.setCoeffB();
+                spline.setCoeffSpline(initial.GetTA(), initial.GetTB());
+
+                this.tError = 0;
+
+                for (int i = 0; i <= spline.GetN(); i ++)
+                {
+                    chart_plot.Series[1].Points.AddXY(spline.GetX(i), spline.GetFX(i));
+                }
+
+                for (double j = 0; j < 10; j += 0.001)
+                {
+                    chart_plot.Series[2].Points.AddXY(j, spline.pointSpline(j));
+
+                    double t = Math.Abs(initial.Function(j) - spline.pointSpline(j));
+                    if ((t > this.tError)) this.tError = t;
+                }
+
             }
 
-            List<List<double>> pp1 = new List<List<double>>();
-            pp1.Add(polynom.GetX());
-            pp1.Add(polynom.GetFX());
 
-            Polynom mee = new Polynom(pp1);
-
-
-            for (double j = 0; j < 10; j += 0.001)
+            //ploynom
             {
-                chart_plot.Series[3].Points.AddXY(j, mee.pointPolynom(j));
+                List<List<double>> pp1 = new List<List<double>>();
+                pp1.Add(spline.GetX());
+                pp1.Add(spline.GetFX());
+
+
+                polynom = new Polynom(pp1);
+                for (double j = 0; j < 10; j += 0.001)
+                {
+                    chart_plot.Series[3].Points.AddXY(j, polynom.pointPolynom(j));
                 
+                }
             }
             
             
-            //label3.Text = (this.tError).ToString();
-            label3.Text = (mee.pointPolynom(5.6)).ToString();
+            
+            label3.Text = (this.tError).ToString();
 
 
 
@@ -100,8 +113,10 @@ namespace nmplot
                 Background = OxyColors.White
             };
             pm.Series.Add(new FunctionSeries(Math.Sin, initial.GetA(), initial.GetB(), 0.5, "Sin(x)"));
-            pm.Series.Add(new FunctionSeries(mee.pointPolynom, initial.GetA(), initial.GetB(), 0.2, "P(x)"));
-            pm.Series.Add(new FunctionSeries(polynom.pointSpline, initial.GetA(), initial.GetB(), 0.1, "S(x)"));
+
+
+            pm.Series.Add(new FunctionSeries(polynom.pointPolynom, initial.GetA(), initial.GetB(), 0.2, "P(x)"));
+            pm.Series.Add(new FunctionSeries(spline.pointSpline, initial.GetA(), initial.GetB(), 0.1, "S(x)"));
 
             oxy_plot.Model = pm;
         }
