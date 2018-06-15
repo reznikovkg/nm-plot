@@ -19,7 +19,7 @@ namespace nmplot
         public double Function(double x)
         {
             return Math.Sin(x);
-            //return x * x *x;
+            //return x;
             //return 1 / (1 + 25 * x * x);
             //return Math.Abs(x);
         }

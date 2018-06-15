@@ -91,6 +91,16 @@ namespace nmplot.Classes
             return this.FX.Count;
         }
 
+        public List<double> GetX()
+        {
+            return this.X;
+        }
+
+        public List<double> GetFX()
+        {
+            return this.FX;
+        }
+
         public double GetX(int i)
         {
             return this.X[i];
@@ -186,10 +196,24 @@ namespace nmplot.Classes
         }
 
 
-        public double pointSpline(double x, int i)
+        public double pointSpline(double x)
         {
+            int i = 0;
+            bool ost = true;
+
+            while (ost)
+            {
+                if ((i<this.X.Count-1)&&(this.X[i] <= x) && (this.X[i+1] >x))
+                {
+                    ost = false;
+                } else {
+                    i++;
+                }
+            }
+
             double xt = x - this.X[i];
             return this.A[i] + this.B[i] * xt + this.C[i] * xt * xt + this.D[i] * xt * xt * xt;
+
         }
     }
 }

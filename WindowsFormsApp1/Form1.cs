@@ -33,12 +33,14 @@ namespace nmplot
         public Form1()
         {
             InitializeComponent();
+
+
             initial = new IP();
             polynom = new Spline();
 
 
 
-        polynom.SetPointsByFunction(initial.Function, initial.GetA(), initial.GetB(), initial.GetN());
+            polynom.SetPointsByFunction(initial.Function, initial.GetA(), initial.GetB(), initial.GetN());
             polynom.setCoeffB();
             polynom.setCoeffSpline(initial.GetTA(), initial.GetTB());
 
@@ -62,19 +64,31 @@ namespace nmplot
 
 
             this.tError = 0;
-            for (int i = 0; i <= polynom.GetN()-1; i++)
+            
+            for (double j = 0; j < 10; j += 0.001)
             {
-                for (double j = polynom.GetX(i); j < polynom.GetX(i + 1); j += 0.001)
-                {
-                    chart_plot.Series[2].Points.AddXY(j, polynom.pointSpline(j,i));
+                chart_plot.Series[2].Points.AddXY(j, polynom.pointSpline(j));
 
-                    double t = Math.Abs(initial.Function(j) - polynom.pointSpline(j, i));
-                    if ((t > this.tError)) this.tError = t;
-                }
+                double t = Math.Abs(initial.Function(j) - polynom.pointSpline(j));
+                if ((t > this.tError)) this.tError = t;
             }
 
+            List<List<double>> pp1 = new List<List<double>>();
+            pp1.Add(polynom.GetX());
+            pp1.Add(polynom.GetFX());
 
-            label3.Text = (this.tError).ToString();
+            Polynom mee = new Polynom(pp1);
+
+
+            for (double j = 0; j < 10; j += 0.001)
+            {
+                chart_plot.Series[3].Points.AddXY(j, mee.pointPolynom(j));
+                
+            }
+            
+            
+            //label3.Text = (this.tError).ToString();
+            label3.Text = (mee.pointPolynom(5.6)).ToString();
 
 
 
@@ -82,25 +96,25 @@ namespace nmplot
             var pm = new PlotModel
             {
                 Title = "Trigonometric functions",
-                Subtitle = "Example using the FunctionSeries",
                 PlotType = PlotType.Cartesian,
                 Background = OxyColors.White
             };
-            pm.Series.Add(new FunctionSeries(Math.Sin, -10, 10, 0.2, "sin(x)"));
-            pm.Series.Add(new FunctionSeries(Math.Cos, -10, 10, 0.1, "cos(x)"));
-            pm.Series.Add(new FunctionSeries(t => 5 * Math.Cos(t), t => 5 * Math.Sin(t), 0, 2 * Math.PI, 0.1, "cos(t),sin(t)"));
-            plot1.Model = pm;
+            pm.Series.Add(new FunctionSeries(Math.Sin, initial.GetA(), initial.GetB(), 0.5, "Sin(x)"));
+            pm.Series.Add(new FunctionSeries(mee.pointPolynom, initial.GetA(), initial.GetB(), 0.2, "P(x)"));
+            pm.Series.Add(new FunctionSeries(polynom.pointSpline, initial.GetA(), initial.GetB(), 0.1, "S(x)"));
+
+            oxy_plot.Model = pm;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            chart_plot.ChartAreas[0].AxisX.ScaleView.Zoom(1.98, 2.02);
+            //chart_plot.ChartAreas[0].AxisX.ScaleView.Zoom(1.98, 2.02);
             chart_plot.ChartAreas[0].CursorX.IsUserEnabled = true;
             chart_plot.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
             chart_plot.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
             chart_plot.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
 
-            chart_plot.ChartAreas[0].AxisY.ScaleView.Zoom(0.85, 0.95);
+            //chart_plot.ChartAreas[0].AxisY.ScaleView.Zoom(0.85, 0.95);
             chart_plot.ChartAreas[0].CursorY.IsUserEnabled = true;
             chart_plot.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
             chart_plot.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
@@ -150,6 +164,7 @@ namespace nmplot
                 checkBoxSpline.Checked = true;
 
                 chart_plot.Series[3].Enabled = true;
+                checkBoxPolynom.Checked = true;
             }
             else
             {
@@ -163,6 +178,7 @@ namespace nmplot
                 checkBoxSpline.Checked = false;
 
                 chart_plot.Series[3].Enabled = false;
+                checkBoxPolynom.Checked = false;
             }
         }
 
@@ -202,7 +218,17 @@ namespace nmplot
             }
         }
 
-
+        private void checkBox_Polynom(object sender, EventArgs e)
+        {
+            if (checkBoxPolynom.Checked == true)
+            {
+                chart_plot.Series[3].Enabled = true;
+            }
+            else
+            {
+                chart_plot.Series[3].Enabled = false;
+            }
+        }
 
 
 
@@ -325,15 +351,44 @@ namespace nmplot
 
         private void chart_plot_MouseClick(object sender, MouseEventArgs e)
         {
-            MessageBox.Show((e.X).ToString());
+            //MessageBox.Show((e.X).ToString());
             var res = chart_plot.HitTest(e.X, e.Y);
-            if (res.Series != null)
-                MessageBox.Show(res.Series.Points[res.PointIndex].YValues[0].ToString());
+            //if (res.Series != null)
+              //  MessageBox.Show(res.Series.Points[res.PointIndex].YValues[0].ToString());
         }
 
         private void plot1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void chartToolStripMenuMethodChart_Click(object sender, EventArgs e)
+        {
+            bool status = chartToolStripMenuMethodChart.Checked;
+
+            if (status != true)
+            {
+                chartToolStripMenuMethodChart.Checked = true;
+                chart_plot.Visible = true;
+
+                oxy_plot.Visible = false;
+                oxyPlotToolStripMenuOxyplot.Checked = false;
+            }
+            
+        }
+
+        private void oxyPlotToolStripMenuOxyplot_Click(object sender, EventArgs e)
+        {
+            bool status = oxyPlotToolStripMenuOxyplot.Checked;
+
+            if (status != true)
+            {
+                oxyPlotToolStripMenuOxyplot.Checked = true;
+                oxy_plot.Visible = true;
+
+                chart_plot.Visible = false;
+                chartToolStripMenuMethodChart.Checked = false;
+            }
         }
     }
 }
