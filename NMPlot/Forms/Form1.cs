@@ -32,93 +32,13 @@ namespace nmplot
 
         double tError;
 
-       
-
-
         public Form1()
         {
             InitializeComponent();
-
-
+            
             initial = new IP();
-
-
-
-            spline = new Spline();
-            polynom = new Polynom();
-
-
-
-
-
-            for (double i = initial.GetA()-10; i < initial.GetB()+10; i+=0.01)
-            {
-                chart_plot.Series[0].Points.AddXY(i, initial.Function(i));
-            }
-
             
-
-
-
-            //spline
-            {
-                spline.SetPointsByFunction(initial.Function, initial.GetA(), initial.GetB(), initial.GetN());
-                spline.setCoeffB();
-                spline.setCoeffSpline(initial.GetTA(), initial.GetTB());
-
-                this.tError = 0;
-
-                for (int i = 0; i <= spline.GetN(); i ++)
-                {
-                    chart_plot.Series[1].Points.AddXY(spline.GetX(i), spline.GetFX(i));
-                }
-
-                for (double j = 0; j < 10; j += 0.001)
-                {
-                    chart_plot.Series[2].Points.AddXY(j, spline.pointSpline(j));
-
-                    double t = Math.Abs(initial.Function(j) - spline.pointSpline(j));
-                    if ((t > this.tError)) this.tError = t;
-                }
-
-            }
-
-
-            //ploynom
-            {
-                List<List<double>> pp1 = new List<List<double>>();
-                pp1.Add(spline.GetX());
-                pp1.Add(spline.GetFX());
-
-
-                polynom = new Polynom(pp1);
-                for (double j = 0; j < 10; j += 0.001)
-                {
-                    chart_plot.Series[3].Points.AddXY(j, polynom.pointPolynom(j));
-                
-                }
-            }
-            
-            
-            
-            label3.Text = (this.tError).ToString();
-
-
-
-            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
-            var pm = new PlotModel
-            {
-                Title = "Trigonometric functions",
-                PlotType = PlotType.Cartesian,
-                Background = OxyColors.White
-            };
-            pm.Series.Add(new FunctionSeries(Math.Sin, initial.GetA(), initial.GetB(), 0.5, "Sin(x)"));
-
-
-            pm.Series.Add(new FunctionSeries(polynom.pointPolynom, initial.GetA(), initial.GetB(), 0.2, "P(x)"));
-            pm.Series.Add(new FunctionSeries(spline.pointSpline, initial.GetA(), initial.GetB(), 0.1, "S(x)"));
-
-            oxy_plot.Model = pm;
+            this.loadPlotFromFunction();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -137,6 +57,144 @@ namespace nmplot
 
         }
 
+
+        public void loadPlotFromFunction()
+        {
+            spline = new Spline();
+            polynom = new Polynom();
+
+            for (double i = initial.GetA() - 10; i < initial.GetB() + 10; i += 0.01)
+            {
+                chart_plot.Series[0].Points.AddXY(i, initial.Function(i));
+            }
+
+            //spline
+            {
+                spline.SetPointsByFunction(initial.Function, initial.GetA(), initial.GetB(), initial.GetN());
+                spline.setCoeffB();
+                spline.setCoeffSpline(initial.GetTA(), initial.GetTB());
+
+                this.tError = 0;
+
+                for (int i = 0; i <= spline.GetN(); i++)
+                {
+                    chart_plot.Series[1].Points.AddXY(spline.GetX(i), spline.GetFX(i));
+                }
+
+                for (double j = 0; j < 10; j += 0.001)
+                {
+                    chart_plot.Series[2].Points.AddXY(j, spline.pointSpline(j));
+
+                    double t = Math.Abs(initial.Function(j) - spline.pointSpline(j));
+                    if ((t > this.tError)) this.tError = t;
+                }
+            }
+
+            //ploynom
+            {
+                List<List<double>> pp1 = new List<List<double>>();
+                pp1.Add(spline.GetX());
+                pp1.Add(spline.GetFX());
+
+
+                polynom = new Polynom(pp1);
+                for (double j = 0; j < 10; j += 0.001)
+                {
+                    chart_plot.Series[3].Points.AddXY(j, polynom.pointPolynom(j));
+
+                }
+            }
+
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            var pm = new PlotModel
+            {
+                Title = "NM PLOT",
+                PlotType = PlotType.Cartesian,
+                Background = OxyColors.White
+            };
+            pm.Series.Add(new FunctionSeries(Math.Sin, initial.GetA(), initial.GetB(), 0.01, "Sin(x)"));
+            
+            pm.Series.Add(new FunctionSeries(polynom.pointPolynom, initial.GetA(), initial.GetB(), 0.2, "P(x)"));
+            pm.Series.Add(new FunctionSeries(spline.pointSpline, initial.GetA(), initial.GetB(), 0.1, "S(x)"));
+
+            oxy_plot.Model = pm;
+        }
+
+        public void loadPlotFromPoints()
+        {
+            spline = new Spline();
+            polynom = new Polynom();
+            
+            chart_plot.Series[0].Points.Clear();
+
+            //spline
+            {
+                spline.SetPoints(this.X, this.Y);
+                spline.setCoeffB();
+                spline.setCoeffSpline(initial.GetTA(), initial.GetTB());
+
+                this.tError = 0;
+
+                for (int i = 0; i <= spline.GetN(); i++)
+                {
+                    chart_plot.Series[1].Points.AddXY(spline.GetX(i), spline.GetFX(i));
+                }
+
+                for (double j = 0; j < 10; j += 0.001)
+                {
+                    chart_plot.Series[2].Points.AddXY(j, spline.pointSpline(j));
+
+                    double t = Math.Abs(initial.Function(j) - spline.pointSpline(j));
+                    if ((t > this.tError)) this.tError = t;
+                }
+            }
+
+            //ploynom
+            {
+                List<List<double>> pp1 = new List<List<double>>();
+                pp1.Add(spline.GetX());
+                pp1.Add(spline.GetFX());
+
+
+                polynom = new Polynom(pp1);
+                for (double j = 0; j < 10; j += 0.001)
+                {
+                    chart_plot.Series[3].Points.AddXY(j, polynom.pointPolynom(j));
+
+                }
+            }
+
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            var pm = new PlotModel
+            {
+                Title = "NM PLOT",
+                PlotType = PlotType.Cartesian,
+                Background = OxyColors.White
+            };
+            pm.Series.Add(new FunctionSeries(Math.Sin, initial.GetA(), initial.GetB(), 0.01, "Sin(x)"));
+
+            pm.Series.Add(new FunctionSeries(polynom.pointPolynom, initial.GetA(), initial.GetB(), 0.2, "P(x)"));
+            pm.Series.Add(new FunctionSeries(spline.pointSpline, initial.GetA(), initial.GetB(), 0.1, "S(x)"));
+
+            oxy_plot.Model = pm;
+        }
+
+        public void clearPlot()
+        {
+            chart_plot.Series[3].Points.Clear();
+            chart_plot.Series[2].Points.Clear();
+
+
+            var pm = new PlotModel
+            {
+                Title = "NM PLOT",
+                PlotType = PlotType.Cartesian,
+                Background = OxyColors.White
+            };
+
+            oxy_plot.Model = pm;
+        }
+
         ///////////////
         //
         //     Menu
@@ -147,6 +205,8 @@ namespace nmplot
         {
             Application.Exit();
         }
+        
+
 
         ///////////////
         //
@@ -313,18 +373,12 @@ namespace nmplot
         {
             chart_plot.Series[0].Points.Clear();
         }
-
         
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            label3.Text = "dsadsa";
-        }
 
         
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("топовая прога");
+            MessageBox.Show("NM-Plot");
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -377,33 +431,32 @@ namespace nmplot
 
         }
 
-        private void chartToolStripMenuMethodChart_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
-            bool status = chartToolStripMenuMethodChart.Checked;
-
-            if (status != true)
-            {
-                chartToolStripMenuMethodChart.Checked = true;
-                chart_plot.Visible = true;
-
-                oxy_plot.Visible = false;
-                oxyPlotToolStripMenuOxyplot.Checked = false;
-            }
-            
+            chart_plot.Series[1].Points.Clear();
+            this.X = new List<double>();
+            this.Y = new List<double>();
         }
 
-        private void oxyPlotToolStripMenuOxyplot_Click(object sender, EventArgs e)
+        private void button3_Click_1(object sender, EventArgs e)
         {
-            bool status = oxyPlotToolStripMenuOxyplot.Checked;
+            double x;
+            Double.TryParse(xAddOxyplot.Text, out x);
+            this.X.Add(x);
+            xAddOxyplot.Text = "";
 
-            if (status != true)
-            {
-                oxyPlotToolStripMenuOxyplot.Checked = true;
-                oxy_plot.Visible = true;
+            double y;
+            Double.TryParse(yAddOxyplot.Text, out y);
+            this.Y.Add(y);
+            yAddOxyplot.Text = "";
 
-                chart_plot.Visible = false;
-                chartToolStripMenuMethodChart.Checked = false;
-            }
+            chart_plot.Series[1].Points.AddXY(x,y);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            clearPlot();
+            loadPlotFromPoints();
         }
     }
 }

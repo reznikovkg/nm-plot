@@ -81,6 +81,19 @@ namespace nmplot.Classes
             }
         }
 
+        public void SetPoints(List<double> _X, List<double> _Y)
+        {
+            this.X = _X;
+            this.FX = _Y;
+            this.n = this.X.Count;
+            this.H = new List<double>();
+
+            for (int i = 0; i < this.n-1; i++)
+            {
+                this.H.Add(Math.Abs(this.X[i] - this.X[i + 1]));
+            }
+        }
+
         public int CountX()
         {
             return this.X.Count;
