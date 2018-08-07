@@ -19,6 +19,8 @@ namespace nmplot
 
     using OxyPlot;
     using OxyPlot.Series;
+    using OxyPlot.Axes;
+    using OxyPlot.Annotations;
 
     public partial class Form1 : Form
     {
@@ -112,10 +114,10 @@ namespace nmplot
                 PlotType = PlotType.Cartesian,
                 Background = OxyColors.White
             };
-            pm.Series.Add(new FunctionSeries(Math.Sin, initial.GetA(), initial.GetB(), 0.01, "Sin(x)"));
+            pm.Series.Add(new FunctionSeries(initial.Function, initial.GetA(), initial.GetB(), 0.01, "F(x)"));
             
-            pm.Series.Add(new FunctionSeries(polynom.pointPolynom, initial.GetA(), initial.GetB(), 0.2, "P(x)"));
-            pm.Series.Add(new FunctionSeries(spline.pointSpline, initial.GetA(), initial.GetB(), 0.1, "S(x)"));
+            pm.Series.Add(new FunctionSeries(polynom.pointPolynom, initial.GetA(), initial.GetB(), 0.02, "P(x)"));
+            pm.Series.Add(new FunctionSeries(spline.pointSpline, initial.GetA(), initial.GetB(), 0.01, "S(x)"));
 
             oxy_plot.Model = pm;
         }
@@ -426,9 +428,23 @@ namespace nmplot
               //  MessageBox.Show(res.Series.Points[res.PointIndex].YValues[0].ToString());
         }
 
-        private void plot1_Click(object sender, EventArgs e)
+        private void plot1_Click(object sender, OxyMouseDownEventArgs ex)
         {
+            /*PlotModel plot = oxy_plot.Model as PlotModel;
+            OxyPlot.ElementCollection<OxyPlot.Axes.Axis> axisList = plot.Axes;
 
+            Axis X_Axis = oxy_plot.Model.Axes[0];
+            Axis Y_Axis = oxy_plot.Model.Axes[1];
+
+            foreach (OxyPlot.Axes.Axis ax in axisList)
+            {
+                if (ax.Position == AxisPosition.Bottom)
+                    X_Axis = ax;
+                else if (ax.Position == AxisPosition.Left)
+                    Y_Axis = ax;
+            }
+
+            DataPoint p = OxyPlot.Axes.Axis.InverseTransform(ex.Position, X_Axis, Y_Axis);*/
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -457,6 +473,30 @@ namespace nmplot
         {
             clearPlot();
             loadPlotFromPoints();
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+        
+
+        private void oxy_plot_MouseDown(object sender, OxyMouseDownEventArgs ex)
+        {
+            OxyPlot.ElementCollection<OxyPlot.Axes.Axis> axisList = oxy_plot.Model.Axes;
+
+            Axis X_Axis = axisList[0];
+            Axis Y_Axis = axisList[1];
+
+            foreach (OxyPlot.Axes.Axis ax in axisList)
+            {
+                if (ax.Position == AxisPosition.Bottom)
+                    X_Axis = ax;
+                else if (ax.Position == AxisPosition.Left)
+                    Y_Axis = ax;
+            }
+
+            DataPoint p = OxyPlot.Axes.Axis.InverseTransform(ex.Position, X_Axis, Y_Axis);
         }
     }
 }

@@ -31,12 +31,12 @@ namespace nmplot
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart_plot = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button2 = new System.Windows.Forms.Button();
             this.initial_param_a = new System.Windows.Forms.TextBox();
@@ -67,17 +67,18 @@ namespace nmplot
             this.oxy_plot = new OxyPlot.WindowsForms.PlotView();
             this.panelChart = new System.Windows.Forms.Panel();
             this.panelOxyplot = new System.Windows.Forms.Panel();
+            this.tabControl3 = new System.Windows.Forms.TabControl();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.yAddOxyplot = new System.Windows.Forms.TextBox();
+            this.xAddOxyplot = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabControl3 = new System.Windows.Forms.TabControl();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.xAddOxyplot = new System.Windows.Forms.TextBox();
-            this.yAddOxyplot = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart_plot)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -86,11 +87,11 @@ namespace nmplot
             this.tabPage3.SuspendLayout();
             this.panelChart.SuspendLayout();
             this.panelOxyplot.SuspendLayout();
+            this.tabControl3.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            this.tabControl3.SuspendLayout();
-            this.tabPage6.SuspendLayout();
             this.SuspendLayout();
             // 
             // chart_plot
@@ -98,54 +99,54 @@ namespace nmplot
             this.chart_plot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea2.AxisX2.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Lines;
-            chartArea2.Name = "ChartArea1";
-            this.chart_plot.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart_plot.Legends.Add(legend2);
+            chartArea1.AxisX2.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Lines;
+            chartArea1.Name = "ChartArea1";
+            this.chart_plot.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart_plot.Legends.Add(legend1);
             this.chart_plot.Location = new System.Drawing.Point(17, 15);
             this.chart_plot.Margin = new System.Windows.Forms.Padding(3, 3, 300, 3);
             this.chart_plot.Name = "chart_plot";
             this.chart_plot.Padding = new System.Windows.Forms.Padding(0, 0, 300, 0);
             this.chart_plot.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Color = System.Drawing.Color.Blue;
-            series5.Legend = "Legend1";
-            series5.LegendText = "Function";
-            series5.Name = "Function";
-            series5.ShadowColor = System.Drawing.SystemColors.ControlDarkDark;
-            series5.ShadowOffset = 1;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            series6.Legend = "Legend1";
-            series6.LegendText = "Points";
-            series6.MarkerBorderColor = System.Drawing.Color.Blue;
-            series6.MarkerBorderWidth = 5;
-            series6.MarkerColor = System.Drawing.Color.WhiteSmoke;
-            series6.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star6;
-            series6.Name = "Points";
-            series6.ShadowOffset = 2;
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series7.Color = System.Drawing.Color.Red;
-            series7.Legend = "Legend1";
-            series7.LegendText = "Spline";
-            series7.Name = "Spline";
-            series7.ShadowColor = System.Drawing.SystemColors.ControlDarkDark;
-            series7.ShadowOffset = 1;
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Color = System.Drawing.Color.Lime;
-            series8.Legend = "Legend1";
-            series8.Name = "Polynom";
-            series8.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            series8.ShadowOffset = 1;
-            this.chart_plot.Series.Add(series5);
-            this.chart_plot.Series.Add(series6);
-            this.chart_plot.Series.Add(series7);
-            this.chart_plot.Series.Add(series8);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.Color.Blue;
+            series1.Legend = "Legend1";
+            series1.LegendText = "Function";
+            series1.Name = "Function";
+            series1.ShadowColor = System.Drawing.SystemColors.ControlDarkDark;
+            series1.ShadowOffset = 1;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series2.Legend = "Legend1";
+            series2.LegendText = "Points";
+            series2.MarkerBorderColor = System.Drawing.Color.Blue;
+            series2.MarkerBorderWidth = 5;
+            series2.MarkerColor = System.Drawing.Color.WhiteSmoke;
+            series2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star6;
+            series2.Name = "Points";
+            series2.ShadowOffset = 2;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Color = System.Drawing.Color.Red;
+            series3.Legend = "Legend1";
+            series3.LegendText = "Spline";
+            series3.Name = "Spline";
+            series3.ShadowColor = System.Drawing.SystemColors.ControlDarkDark;
+            series3.ShadowOffset = 1;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Color = System.Drawing.Color.Lime;
+            series4.Legend = "Legend1";
+            series4.Name = "Polynom";
+            series4.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            series4.ShadowOffset = 1;
+            this.chart_plot.Series.Add(series1);
+            this.chart_plot.Series.Add(series2);
+            this.chart_plot.Series.Add(series3);
+            this.chart_plot.Series.Add(series4);
             this.chart_plot.Size = new System.Drawing.Size(830, 475);
             this.chart_plot.TabIndex = 1;
             this.chart_plot.Text = "chart1";
@@ -379,7 +380,7 @@ namespace nmplot
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(10);
-            this.tabPage1.Size = new System.Drawing.Size(192, 589);
+            this.tabPage1.Size = new System.Drawing.Size(196, 449);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Show/Hide";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -394,7 +395,7 @@ namespace nmplot
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 601);
+            this.tabPage2.Size = new System.Drawing.Size(196, 449);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "T/B/L/R";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -429,7 +430,6 @@ namespace nmplot
             this.oxy_plot.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
             this.oxy_plot.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.oxy_plot.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
-            this.oxy_plot.Click += new System.EventHandler(this.plot1_Click);
             // 
             // panelChart
             // 
@@ -452,6 +452,99 @@ namespace nmplot
             this.panelOxyplot.Name = "panelOxyplot";
             this.panelOxyplot.Size = new System.Drawing.Size(1079, 499);
             this.panelOxyplot.TabIndex = 25;
+            // 
+            // tabControl3
+            // 
+            this.tabControl3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl3.Controls.Add(this.tabPage6);
+            this.tabControl3.Controls.Add(this.tabPage7);
+            this.tabControl3.Location = new System.Drawing.Point(865, 22);
+            this.tabControl3.Name = "tabControl3";
+            this.tabControl3.SelectedIndex = 0;
+            this.tabControl3.Size = new System.Drawing.Size(196, 461);
+            this.tabControl3.TabIndex = 1;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.checkBox1);
+            this.tabPage6.Controls.Add(this.button4);
+            this.tabPage6.Controls.Add(this.button3);
+            this.tabPage6.Controls.Add(this.yAddOxyplot);
+            this.tabPage6.Controls.Add(this.xAddOxyplot);
+            this.tabPage6.Controls.Add(this.button1);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(188, 435);
+            this.tabPage6.TabIndex = 0;
+            this.tabPage6.Text = "Points";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(7, 100);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(84, 17);
+            this.checkBox1.TabIndex = 5;
+            this.checkBox1.Text = "Add by click";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(7, 123);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(175, 23);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "Plot";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(7, 68);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(175, 23);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "Add";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // yAddOxyplot
+            // 
+            this.yAddOxyplot.Location = new System.Drawing.Point(91, 41);
+            this.yAddOxyplot.Name = "yAddOxyplot";
+            this.yAddOxyplot.Size = new System.Drawing.Size(91, 20);
+            this.yAddOxyplot.TabIndex = 2;
+            // 
+            // xAddOxyplot
+            // 
+            this.xAddOxyplot.Location = new System.Drawing.Point(7, 41);
+            this.xAddOxyplot.Name = "xAddOxyplot";
+            this.xAddOxyplot.Size = new System.Drawing.Size(78, 20);
+            this.xAddOxyplot.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(176, 28);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Remove points";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(188, 435);
+            this.tabPage7.TabIndex = 1;
+            this.tabPage7.Text = "tabPage7";
+            this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // tabControl2
             // 
@@ -486,87 +579,6 @@ namespace nmplot
             this.tabPage5.Text = "oXYplot";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // tabControl3
-            // 
-            this.tabControl3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl3.Controls.Add(this.tabPage6);
-            this.tabControl3.Controls.Add(this.tabPage7);
-            this.tabControl3.Location = new System.Drawing.Point(865, 22);
-            this.tabControl3.Name = "tabControl3";
-            this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(196, 461);
-            this.tabControl3.TabIndex = 1;
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Controls.Add(this.button4);
-            this.tabPage6.Controls.Add(this.button3);
-            this.tabPage6.Controls.Add(this.yAddOxyplot);
-            this.tabPage6.Controls.Add(this.xAddOxyplot);
-            this.tabPage6.Controls.Add(this.button1);
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(188, 435);
-            this.tabPage6.TabIndex = 0;
-            this.tabPage6.Text = "Points";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(188, 435);
-            this.tabPage7.TabIndex = 1;
-            this.tabPage7.Text = "tabPage7";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(6, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(176, 28);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Remove points";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // xAddOxyplot
-            // 
-            this.xAddOxyplot.Location = new System.Drawing.Point(7, 41);
-            this.xAddOxyplot.Name = "xAddOxyplot";
-            this.xAddOxyplot.Size = new System.Drawing.Size(78, 20);
-            this.xAddOxyplot.TabIndex = 1;
-            // 
-            // yAddOxyplot
-            // 
-            this.yAddOxyplot.Location = new System.Drawing.Point(91, 41);
-            this.yAddOxyplot.Name = "yAddOxyplot";
-            this.yAddOxyplot.Size = new System.Drawing.Size(91, 20);
-            this.yAddOxyplot.TabIndex = 2;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(7, 68);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(175, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Add";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(7, 98);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(175, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Plot";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -592,12 +604,12 @@ namespace nmplot
             this.tabPage3.PerformLayout();
             this.panelChart.ResumeLayout(false);
             this.panelOxyplot.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -645,6 +657,7 @@ namespace nmplot
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox yAddOxyplot;
         private System.Windows.Forms.TextBox xAddOxyplot;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

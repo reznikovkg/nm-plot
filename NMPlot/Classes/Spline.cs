@@ -85,10 +85,10 @@ namespace nmplot.Classes
         {
             this.X = _X;
             this.FX = _Y;
-            this.n = this.X.Count;
+            this.n = this.X.Count - 1;
             this.H = new List<double>();
 
-            for (int i = 0; i < this.n-1; i++)
+            for (int i = 0; i < this.n; i++)
             {
                 this.H.Add(Math.Abs(this.X[i] - this.X[i + 1]));
             }
@@ -214,9 +214,9 @@ namespace nmplot.Classes
             int i = 0;
             bool ost = true;
 
-            while (ost)
+            while ((ost)&&(i>=0)&& (i < this.X.Count - 1))
             {
-                if ((i<this.X.Count-1)&&(this.X[i] <= x) && (this.X[i+1] >x))
+                if ( ( this.X[i] <= x ) && ( this.X[i+1] > x ) )
                 {
                     ost = false;
                 } else {
@@ -225,7 +225,13 @@ namespace nmplot.Classes
             }
 
             double xt = x - this.X[i];
-            return this.A[i] + this.B[i] * xt + this.C[i] * xt * xt + this.D[i] * xt * xt * xt;
+            if (i < this.B.Count)
+            {
+                return this.A[i] + this.B[i] * xt + this.C[i] * xt * xt + this.D[i] * xt * xt * xt;
+            } else
+            {
+                return 0;
+            }
 
         }
     }
