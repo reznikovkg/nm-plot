@@ -49,6 +49,8 @@ namespace nmplot
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxPoints = new System.Windows.Forms.CheckBox();
@@ -230,6 +232,7 @@ namespace nmplot
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.файлToolStripMenuItem,
+            this.testsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -257,6 +260,21 @@ namespace nmplot
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.файлToolStripMenuItem.Text = "Help";
+            // 
+            // testsToolStripMenuItem
+            // 
+            this.testsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runToolStripMenuItem});
+            this.testsToolStripMenuItem.Name = "testsToolStripMenuItem";
+            this.testsToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.testsToolStripMenuItem.Text = "Tests";
+            // 
+            // runToolStripMenuItem
+            // 
+            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.runToolStripMenuItem.Text = "Run";
+            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -658,6 +676,8 @@ namespace nmplot
         private System.Windows.Forms.TextBox yAddOxyplot;
         private System.Windows.Forms.TextBox xAddOxyplot;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ToolStripMenuItem testsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
     }
 }
 

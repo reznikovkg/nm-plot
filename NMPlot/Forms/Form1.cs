@@ -12,15 +12,16 @@ using nmplot.Classes;
 using OxyPlot;
 using OxyPlot.Series;
 
+
 namespace nmplot
 {
     using System;
     using System.Windows.Forms;
-
     using OxyPlot;
     using OxyPlot.Series;
     using OxyPlot.Axes;
     using OxyPlot.Annotations;
+
 
     public partial class Form1 : Form
     {
@@ -497,6 +498,30 @@ namespace nmplot
             }
 
             DataPoint p = OxyPlot.Axes.Axis.InverseTransform(ex.Position, X_Axis, Y_Axis);
+        }
+
+        private void runToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<double> x = new List<double>();
+            List<double> y = new List<double>();
+            List<double> pol = new List<double>();
+            List<double> spl = new List<double>();
+            
+
+            for (double t = initial.GetA(); t<=initial.GetB(); t+=0.01)
+            {
+                x.Add(t);
+                y.Add(initial.Function(t));
+
+                spl.Add(spline.pointSpline(t));
+                pol.Add(polynom.pointPolynom(t));
+            }
+
+
+            Form2 f = new Form2(x,y,pol,spl);
+
+
+            f.Show();
         }
     }
 }
