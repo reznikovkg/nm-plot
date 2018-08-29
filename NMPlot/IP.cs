@@ -30,9 +30,9 @@ namespace nmplot
         public IP()
         {
             this.a = 0;
-            this.b = 10;
+            this.b = 15;
 
-            this.n = 10;
+            this.n = 30;
 
             this.tA = 0;
             this.tB = 0;

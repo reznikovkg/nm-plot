@@ -66,7 +66,7 @@ namespace nmplot
             spline = new Spline();
             polynom = new Polynom();
 
-            for (double i = initial.GetA() - 10; i < initial.GetB() + 10; i += 0.01)
+            for (double i = initial.GetA() ; i < initial.GetB(); i += 0.01)
             {
                 chart_plot.Series[0].Points.AddXY(i, initial.Function(i));
             }
@@ -84,7 +84,7 @@ namespace nmplot
                     chart_plot.Series[1].Points.AddXY(spline.GetX(i), spline.GetFX(i));
                 }
 
-                for (double j = 0; j < 10; j += 0.001)
+                for (double j = initial.GetA(); j < initial.GetB(); j += 0.001)
                 {
                     chart_plot.Series[2].Points.AddXY(j, spline.pointSpline(j));
 
@@ -101,7 +101,7 @@ namespace nmplot
 
 
                 polynom = new Polynom(pp1);
-                for (double j = 0; j < 10; j += 0.001)
+                for (double j = initial.GetA(); j < initial.GetB(); j += 0.001)
                 {
                     chart_plot.Series[3].Points.AddXY(j, polynom.pointPolynom(j));
 
@@ -117,7 +117,7 @@ namespace nmplot
             };
             pm.Series.Add(new FunctionSeries(initial.Function, initial.GetA(), initial.GetB(), 0.01, "F(x)"));
             
-            pm.Series.Add(new FunctionSeries(polynom.pointPolynom, initial.GetA(), initial.GetB(), 0.02, "P(x)"));
+            pm.Series.Add(new FunctionSeries(polynom.pointPolynom, initial.GetA(), initial.GetB(), 0.01, "P(x)"));
             pm.Series.Add(new FunctionSeries(spline.pointSpline, initial.GetA(), initial.GetB(), 0.01, "S(x)"));
 
             oxy_plot.Model = pm;
@@ -143,7 +143,7 @@ namespace nmplot
                     chart_plot.Series[1].Points.AddXY(spline.GetX(i), spline.GetFX(i));
                 }
 
-                for (double j = 0; j < 10; j += 0.001)
+                for (double j = initial.GetA(); j < initial.GetB(); j += 0.001)
                 {
                     chart_plot.Series[2].Points.AddXY(j, spline.pointSpline(j));
 
@@ -160,7 +160,7 @@ namespace nmplot
 
 
                 polynom = new Polynom(pp1);
-                for (double j = 0; j < 10; j += 0.001)
+                for (double j = initial.GetA(); j < initial.GetB(); j += 0.001)
                 {
                     chart_plot.Series[3].Points.AddXY(j, polynom.pointPolynom(j));
 
@@ -176,8 +176,8 @@ namespace nmplot
             };
             pm.Series.Add(new FunctionSeries(Math.Sin, initial.GetA(), initial.GetB(), 0.01, "Sin(x)"));
 
-            pm.Series.Add(new FunctionSeries(polynom.pointPolynom, initial.GetA(), initial.GetB(), 0.2, "P(x)"));
-            pm.Series.Add(new FunctionSeries(spline.pointSpline, initial.GetA(), initial.GetB(), 0.1, "S(x)"));
+            pm.Series.Add(new FunctionSeries(polynom.pointPolynom, initial.GetA(), initial.GetB(), 0.01, "P(x)"));
+            pm.Series.Add(new FunctionSeries(spline.pointSpline, initial.GetA(), initial.GetB(), 0.01, "S(x)"));
 
             oxy_plot.Model = pm;
         }
@@ -502,23 +502,18 @@ namespace nmplot
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<double> x = new List<double>();
-            List<double> y = new List<double>();
             List<double> pol = new List<double>();
             List<double> spl = new List<double>();
             
 
             for (double t = initial.GetA(); t<=initial.GetB(); t+=0.01)
             {
-                x.Add(t);
-                y.Add(initial.Function(t));
-
-                spl.Add(spline.pointSpline(t));
-                pol.Add(polynom.pointPolynom(t));
+                spl.Add(Math.Abs(initial.Function(t) - spline.pointSpline(t)));
+                pol.Add(Math.Abs(initial.Function(t) - polynom.pointPolynom(t)));
             }
 
 
-            Form2 f = new Form2(x,y,pol,spl);
+            Form2 f = new Form2(pol,spl);
 
 
             f.Show();

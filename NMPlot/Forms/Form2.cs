@@ -22,25 +22,24 @@ namespace nmplot
             InitializeComponent();
         }
 
-        public Form2(List<double> _x, List<double> _y, List<double> _er1, List<double> _er2)
+        public Form2(List<double> _er1, List<double> _er2)
         {
             InitializeComponent();
 
             
             this.errorSpline = _er1;
             this.errorPolynom = _er2;
-
-            String x = "";
+            
             String erpol = "";
             String erspl = "";
 
             for (int t = 0; t<this.errorPolynom.Count;t++)
             {
                 erspl += "\n";
-                erspl += Math.Abs(this.errorSpline[t] - _y[t]);
+                erspl += this.errorSpline[t];
 
                 erpol += "\n";
-                erpol += Math.Abs(this.errorPolynom[t] - _y[t]);
+                erpol += this.errorPolynom[t];
             }
 
             textBox2.Text = erpol;
@@ -48,8 +47,16 @@ namespace nmplot
 
 
 
-            label2.Text = "Max error: " + errorPolynom.Max();
-            label1.Text = "Max error: " + errorSpline.Max();
+            
+            textBox3.Text = errorPolynom.Max().ToString();
+            textBox4.Text = errorPolynom.Sum().ToString();
+
+
+
+
+            textBox6.Text = errorSpline.Max().ToString();
+            textBox5.Text = errorSpline.Sum().ToString();
+
 
         }
         
@@ -75,6 +82,21 @@ namespace nmplot
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
         {
 
         }
