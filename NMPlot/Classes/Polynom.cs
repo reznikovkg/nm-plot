@@ -50,7 +50,7 @@ namespace nmplot.Classes
         {
             diff.Add(new List<double>());
 
-            for (int i = 1; i < n; i++)
+            for (int i = 1; i < n; i++) // *(n)
             {
                 diff[0].Add(getDiffSum(0, i));
             }
@@ -58,9 +58,9 @@ namespace nmplot.Classes
         double getDiffSum(int _i, int _j)
         {
             double sum = 0;
-            for (int i = _i; i <= _j; i++)
+            for (int i = _i; i <= _j; i++) // n
             {
-                sum += (getPointY(i) / getDiffProd(i, _i, _j));
+                sum += (getPointY(i) / getDiffProd(i, _i, _j)); // 2
             }
             return sum;
         }
@@ -68,18 +68,18 @@ namespace nmplot.Classes
         double getDiffProd(int _i, int __i, int __j)
         {
             double prod = 1;
-            for (int _j = __i; _j <= __j; _j++)
+            for (int _j = __i; _j <= __j; _j++) // n!
             {
-                if (_j != _i)
+                if (_j != _i) 
                 {
-                    prod *= (getPointX(_i) - getPointX(_j));
+                    prod *= (getPointX(_i) - getPointX(_j)); // 2
                 }
             }
             return prod;
         }
 
 
-        //polynom out - P(x)
+        //spline out - P(x)
         public double pointPolynom(double x)
         {
             return getPointY(0) + pRec(x, 1, n);

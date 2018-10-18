@@ -13,26 +13,36 @@ namespace nmplot
 
         private int n;
 
+        private List<double> X;
+        private List<double> FX;
+
         private double tA;
         private double tB;
 
         public double Function(double x)
         {
-            return Math.Sin(x);
+            //return Math.Sin(x);
             //return x;
             //return 1 / (1 + 25 * x * x);
-            //return Math.Abs(x);
+            return Math.Abs(x);
         }
 
         public IP()
         {
-            this.a = 0;
+            this.a = -10;
             this.b = 10;
 
-            this.n = 10;
+            this.n = 5;
 
             this.tA = 0;
             this.tB = 0;
+
+            this.X = new List<double>();
+            this.FX = new List<double>();
+
+
+            this.SetX();
+            this.SetFX();
         }
         
         ~IP()
@@ -89,6 +99,31 @@ namespace nmplot
         public double GetTB()
         {
             return this.tB;
+        }
+
+        public void SetX()
+        {
+            for(int i = 0; i <= this.n; i++)
+             {
+                this.X.Add(a + (b - a) * i / n);
+            }
+        }
+
+        public void SetFX()
+        {
+            for (int i = 0; i <= this.n; i++)
+            {
+                this.FX.Add(this.Function(this.X[i]));
+            }
+        }
+
+        public void SetXFX()
+        {
+            for (int i = 0; i <= this.n; i++)
+            {
+                this.X.Add(a + (b - a) * i / n);
+                this.FX.Add(this.Function(this.X[i]));
+            }
         }
     }
 }
