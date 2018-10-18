@@ -21,18 +21,18 @@ namespace nmplot
 
         public double Function(double x)
         {
-            return Math.Sin(x);
+            //return Math.Sin(x);
             //return x;
             //return 1 / (1 + 25 * x * x);
-            //return Math.Abs(x);
+            return Math.Abs(x);
         }
 
         public IP()
         {
-            this.a = 0;
-            this.b = 15;
+            this.a = -10;
+            this.b = 10;
 
-            this.n = 30;
+            this.n = 5;
 
             this.tA = 0;
             this.tB = 0;

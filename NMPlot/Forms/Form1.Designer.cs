@@ -31,12 +31,12 @@ namespace nmplot
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart_plot = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button2 = new System.Windows.Forms.Button();
             this.initial_param_a = new System.Windows.Forms.TextBox();
@@ -101,54 +101,54 @@ namespace nmplot
             this.chart_plot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.AxisX2.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Lines;
-            chartArea1.Name = "ChartArea1";
-            this.chart_plot.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart_plot.Legends.Add(legend1);
+            chartArea2.AxisX2.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Lines;
+            chartArea2.Name = "ChartArea1";
+            this.chart_plot.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart_plot.Legends.Add(legend2);
             this.chart_plot.Location = new System.Drawing.Point(17, 15);
             this.chart_plot.Margin = new System.Windows.Forms.Padding(3, 3, 300, 3);
             this.chart_plot.Name = "chart_plot";
             this.chart_plot.Padding = new System.Windows.Forms.Padding(0, 0, 300, 0);
             this.chart_plot.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Color = System.Drawing.Color.Blue;
-            series1.Legend = "Legend1";
-            series1.LegendText = "Function";
-            series1.Name = "Function";
-            series1.ShadowColor = System.Drawing.SystemColors.ControlDarkDark;
-            series1.ShadowOffset = 1;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            series2.Legend = "Legend1";
-            series2.LegendText = "Points";
-            series2.MarkerBorderColor = System.Drawing.Color.Blue;
-            series2.MarkerBorderWidth = 5;
-            series2.MarkerColor = System.Drawing.Color.WhiteSmoke;
-            series2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star6;
-            series2.Name = "Points";
-            series2.ShadowOffset = 2;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Color = System.Drawing.Color.Red;
-            series3.Legend = "Legend1";
-            series3.LegendText = "Spline";
-            series3.Name = "Spline";
-            series3.ShadowColor = System.Drawing.SystemColors.ControlDarkDark;
-            series3.ShadowOffset = 1;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Color = System.Drawing.Color.Lime;
-            series4.Legend = "Legend1";
-            series4.Name = "Polynom";
-            series4.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            series4.ShadowOffset = 1;
-            this.chart_plot.Series.Add(series1);
-            this.chart_plot.Series.Add(series2);
-            this.chart_plot.Series.Add(series3);
-            this.chart_plot.Series.Add(series4);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Color = System.Drawing.Color.Blue;
+            series5.Legend = "Legend1";
+            series5.LegendText = "Function";
+            series5.Name = "Function";
+            series5.ShadowColor = System.Drawing.SystemColors.ControlDarkDark;
+            series5.ShadowOffset = 1;
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series6.Legend = "Legend1";
+            series6.LegendText = "Points";
+            series6.MarkerBorderColor = System.Drawing.Color.Blue;
+            series6.MarkerBorderWidth = 5;
+            series6.MarkerColor = System.Drawing.Color.WhiteSmoke;
+            series6.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star6;
+            series6.Name = "Points";
+            series6.ShadowOffset = 2;
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Color = System.Drawing.Color.Red;
+            series7.Legend = "Legend1";
+            series7.LegendText = "Spline";
+            series7.Name = "Spline";
+            series7.ShadowColor = System.Drawing.SystemColors.ControlDarkDark;
+            series7.ShadowOffset = 1;
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Color = System.Drawing.Color.Lime;
+            series8.Legend = "Legend1";
+            series8.Name = "Polynom";
+            series8.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            series8.ShadowOffset = 1;
+            this.chart_plot.Series.Add(series5);
+            this.chart_plot.Series.Add(series6);
+            this.chart_plot.Series.Add(series7);
+            this.chart_plot.Series.Add(series8);
             this.chart_plot.Size = new System.Drawing.Size(830, 475);
             this.chart_plot.TabIndex = 1;
             this.chart_plot.Text = "chart1";
@@ -272,7 +272,7 @@ namespace nmplot
             // runToolStripMenuItem
             // 
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(95, 22);
             this.runToolStripMenuItem.Text = "Run";
             this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
@@ -448,6 +448,7 @@ namespace nmplot
             this.oxy_plot.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
             this.oxy_plot.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.oxy_plot.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
+            this.oxy_plot.MouseDown += new System.Windows.Forms.MouseEventHandler(this.oxy_plot_MouseDown);
             // 
             // panelChart
             // 

@@ -35,6 +35,8 @@ namespace nmplot
 
         double tError;
 
+        public PlotModel pm;
+
         public Form1()
         {
             InitializeComponent();
@@ -109,7 +111,7 @@ namespace nmplot
             }
 
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
-            var pm = new PlotModel
+            this.pm = new PlotModel
             {
                 Title = "NM PLOT",
                 PlotType = PlotType.Cartesian,
@@ -143,7 +145,7 @@ namespace nmplot
                     chart_plot.Series[1].Points.AddXY(spline.GetX(i), spline.GetFX(i));
                 }
 
-                for (double j = initial.GetA(); j < initial.GetB(); j += 0.001)
+                for (double j = this.X[0]; j < this.X[this.X.Count-1]; j += 0.001)
                 {
                     chart_plot.Series[2].Points.AddXY(j, spline.pointSpline(j));
 
@@ -160,7 +162,7 @@ namespace nmplot
 
 
                 polynom = new Polynom(pp1);
-                for (double j = initial.GetA(); j < initial.GetB(); j += 0.001)
+                for (double j = this.X[0]; j < this.X[this.X.Count - 1]; j += 0.001)
                 {
                     chart_plot.Series[3].Points.AddXY(j, polynom.pointPolynom(j));
 
@@ -174,10 +176,12 @@ namespace nmplot
                 PlotType = PlotType.Cartesian,
                 Background = OxyColors.White
             };
-            pm.Series.Add(new FunctionSeries(Math.Sin, initial.GetA(), initial.GetB(), 0.01, "Sin(x)"));
+            pm.Series.Clear();
 
-            pm.Series.Add(new FunctionSeries(polynom.pointPolynom, initial.GetA(), initial.GetB(), 0.01, "P(x)"));
-            pm.Series.Add(new FunctionSeries(spline.pointSpline, initial.GetA(), initial.GetB(), 0.01, "S(x)"));
+            pm.Series.Add(new FunctionSeries(polynom.pointPolynom, this.X[0], this.X[this.X.Count - 1], 0.01, "P(x)"));
+            pm.Series.Add(new FunctionSeries(spline.pointSpline, this.X[0], this.X[this.X.Count - 1], 0.01, "S(x)"));
+
+            
 
             oxy_plot.Model = pm;
         }
@@ -517,6 +521,15 @@ namespace nmplot
 
 
             f.Show();
+        }
+
+       
+        private void oxy_plot_MouseDown(object sender, MouseEventArgs e1)
+        {
+            this.pm.MouseDown += (s, e) =>
+            {
+                this.pm.Series.Add(new FunctionSeries(Math.Sin, ((s as LineSeries).InverseTransform(e.Position).X), 3, 0.01, "A(x)"));
+            };
         }
     }
 }
